@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatix - AI Automation Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#ff6b00', // Matches the orange accent
+            'primary-hover': '#e65a00',
+            surface: '#0a0a0a',
+            'surface-light': '#121212',
+            'surface-lighter': '#1e1e1e',
+          },
+          animation: {
+            marquee: 'marquee 40s linear infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            shine: 'shine 5s linear infinite',
+            'grid-scroll': 'grid-scroll 3s linear infinite',
+            'scan-beam': 'scan-beam 8s ease-in-out infinite',
+            'float-slow': 'float 6s ease-in-out infinite',
+            'float-medium': 'float 4s ease-in-out infinite',
+            'float-fast': 'float 3s ease-in-out infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'spin-slower': 'spin 20s linear infinite',
+            'spin-reverse-slow': 'spin-reverse 15s linear infinite',
+            'spin-reverse-slower': 'spin-reverse 25s linear infinite',
+            'scroll-up': 'scroll-up 15s linear infinite',
+            'flow-right': 'flow-right 3s linear infinite',
+            'dash': 'dash 2s linear infinite',
+            'cursor-blink': 'cursor-blink 1s step-end infinite',
+            'highlight': 'highlight-on 4s infinite',
+            'grow-line': 'height-grow 4s ease-in-out infinite',
+            'ping-slow': 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+            'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'blur-in': 'blur-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            // New micro-interaction animations
+            'tilt': 'tilt 10s ease-in-out infinite',
+            'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+            'shimmer': 'shimmer 2.5s linear infinite',
+            'wave': 'wave 3s ease-in-out infinite',
+            'bounce-subtle': 'bounce-subtle 2s ease-in-out infinite',
+            'card-hover': 'card-hover 0.3s ease-out forwards',
+            'text-reveal': 'text-reveal 0.6s ease-out forwards',
+            'border-draw': 'border-draw 1.5s ease-out forwards',
+            'scale-pulse': 'scale-pulse 2s ease-in-out infinite',
+            'rotate-slow': 'rotate-slow 20s linear infinite',
+            'slide-in-bounce': 'slide-in-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
+            'gradient-shift': 'gradient-shift 3s ease infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            shine: {
+              '0%': { backgroundPosition: '200% center' },
+              '100%': { backgroundPosition: '-200% center' },
+            },
+            'grid-scroll': {
+              '0%': { backgroundPosition: '0 0' },
+              '100%': { backgroundPosition: '20px 20px' },
+            },
+            'scan-beam': {
+              '0%': { top: '-20%', opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { opacity: '1' },
+              '100%': { top: '120%', opacity: '0' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            'spin-reverse': {
+              'from': { transform: 'rotate(360deg)' },
+              'to': { transform: 'rotate(0deg)' },
+            },
+            'scroll-up': {
+              '0%': { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-50%)' },
+            },
+            'flow-right': {
+              '0%': { transform: 'translateX(-20px)', opacity: '0' },
+              '20%': { opacity: '1' },
+              '80%': { opacity: '1' },
+              '100%': { transform: 'translateX(20px)', opacity: '0' },
+            },
+            'dash': {
+              '0%': { strokeDashoffset: '24' },
+              '100%': { strokeDashoffset: '0' },
+            },
+            'cursor-blink': {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0' },
+            },
+            'highlight-on': {
+              '0%': { borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.02)', boxShadow: 'none' },
+              '10%': { borderColor: '#ff6b00', backgroundColor: 'rgba(255,107,0,0.1)', boxShadow: '0 0 15px rgba(255,107,0,0.2)' },
+              '30%': { borderColor: '#ff6b00', backgroundColor: 'rgba(255,107,0,0.1)', boxShadow: '0 0 15px rgba(255,107,0,0.2)' },
+              '40%': { borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.02)', boxShadow: 'none' }
+            },
+            'height-grow': {
+              '0%': { height: '0%', opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { height: '100%', opacity: '1' },
+              '100%': { height: '100%', opacity: '0' }
+            },
+            'fade-in-up': {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            'blur-in': {
+              '0%': { opacity: '0', filter: 'blur(10px)', transform: 'scale(0.9)' },
+              '100%': { opacity: '1', filter: 'blur(0)', transform: 'scale(1)' }
+            },
+            // New micro-interaction keyframes
+            'tilt': {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '25%': { transform: 'rotate(0.5deg)' },
+              '75%': { transform: 'rotate(-0.5deg)' }
+            },
+            'glow-pulse': {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(255, 107, 0, 0.3)' },
+              '50%': { boxShadow: '0 0 40px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 107, 0, 0.3)' }
+            },
+            'shimmer': {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' }
+            },
+            'wave': {
+              '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+              '25%': { transform: 'translateY(-5px) rotate(1deg)' },
+              '75%': { transform: 'translateY(5px) rotate(-1deg)' }
+            },
+            'bounce-subtle': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-5px)' }
+            },
+            'card-hover': {
+              '0%': { transform: 'translateY(0) scale(1)' },
+              '100%': { transform: 'translateY(-8px) scale(1.02)' }
+            },
+            'text-reveal': {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            'border-draw': {
+              '0%': { strokeDashoffset: '1000' },
+              '100%': { strokeDashoffset: '0' }
+            },
+            'scale-pulse': {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.05)' }
+            },
+            'rotate-slow': {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
+            },
+            'slide-in-bounce': {
+              '0%': { transform: 'translateX(-100%)', opacity: '0' },
+              '60%': { transform: 'translateX(10%)', opacity: '1' },
+              '100%': { transform: 'translateX(0)' }
+            },
+            'gradient-shift': {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Custom scrollbar for webkit */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #444;
+    }
+
+    .mask-linear-gradient {
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .mask-vertical-gradient {
+      mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    }
+
+    /* Smooth transitions for Reveal component */
+    .reveal-transition {
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
