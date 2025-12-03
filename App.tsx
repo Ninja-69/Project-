@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,23 +13,39 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CoreServices from './components/CoreServices';
 import Process from './components/Process';
+import Work from './components/Work';
+
+
 
 function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'work'>('home');
+
+  // Scroll to top when view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
+
   return (
     <div className="bg-black min-h-screen text-white font-sans selection:bg-primary selection:text-white">
       <Navbar />
       <main>
-        <Hero />
-        <About />
-        <CoreServices />
-        <Features />
-        <Process />
-        <Mission />
-        <Pricing />
-        <Integrations />
-        <Testimonials />
-        <FAQ />
-        <Contact />
+        {currentView === 'home' ? (
+          <>
+            <Hero onViewWork={() => setCurrentView('work')} />
+            <About />
+            <CoreServices />
+            <Features />
+            <Process />
+            <Mission />
+            <Pricing />
+            <Integrations />
+            <Testimonials />
+            <FAQ />
+            <Contact />
+          </>
+        ) : (
+          <Work onBack={() => setCurrentView('home')} />
+        )}
       </main>
       <Footer />
     </div>

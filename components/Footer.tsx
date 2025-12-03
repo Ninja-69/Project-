@@ -1,149 +1,182 @@
-
-import React from 'react';
-import { ArrowRight, Heart, Instagram, Twitter, Youtube, Play, Send } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, Instagram, Twitter, Youtube, Github, Linkedin, Mail, MapPin, ArrowUpRight, Copy, Check } from 'lucide-react';
 import Reveal from './ui/Reveal';
-import Button from './ui/Button';
 
 const Footer: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [time, setTime] = useState('');
+
+  // Update time every minute
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('hello@automatix.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const socialLinks = [
+    { name: 'Twitter', icon: Twitter, url: '#' },
+    { name: 'Instagram', icon: Instagram, url: '#' },
+    { name: 'LinkedIn', icon: Linkedin, url: '#' },
+    { name: 'GitHub', icon: Github, url: '#' },
+    { name: 'YouTube', icon: Youtube, url: '#' },
+  ];
+
+  const footerLinks = [
+    {
+      title: 'Sitemap',
+      links: [
+        { name: 'Home', href: '#' },
+        { name: 'Services', href: '#services' },
+        { name: 'Process', href: '#process' },
+        { name: 'About', href: '#about' },
+        { name: 'Contact', href: '#contact' },
+      ]
+    },
+    {
+      title: 'Socials',
+      links: [
+        { name: 'Twitter (X)', href: '#' },
+        { name: 'Instagram', href: '#' },
+        { name: 'LinkedIn', href: '#' },
+        { name: 'Dribbble', href: '#' },
+        { name: 'Behance', href: '#' },
+      ]
+    },
+    {
+      title: 'Legal',
+      links: [
+        { name: 'Privacy Policy', href: '#' },
+        { name: 'Terms of Service', href: '#' },
+        { name: 'Cookie Policy', href: '#' },
+      ]
+    }
+  ];
+
   return (
-    <footer className="bg-black pt-10 pb-10 relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <footer className="bg-black relative pt-20 md:pt-32 pb-10 overflow-hidden">
+      {/* Background Noise & Gradient */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-black via-transparent to-transparent z-10"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-500/10 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none"></div>
 
-        {/* --- CTA Card Section --- */}
-        <Reveal effect="fade-up" delay={0.1} width="100%">
-          <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-[#111] to-black border border-white/10 p-8 md:p-20 text-center mb-24 group">
+      <div className="container mx-auto px-6 relative z-20">
 
-            {/* Background Glows */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none"></div>
+        {/* Massive CTA Section */}
+        <div className="mb-24 md:mb-32 flex flex-col items-center text-center">
+          <Reveal effect="fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-sm font-medium text-gray-300">Available for new projects</span>
+            </div>
+          </Reveal>
 
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                <span className="text-xs font-medium text-gray-300">Join Us Now</span>
-              </div>
+          <Reveal effect="blur-in" delay={0.1}>
+            <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.9] text-white mb-10 mix-blend-overlay opacity-90">
+              LET'S TALK
+            </h2>
+          </Reveal>
 
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
-                Each Project we Undertake<br />
-                is a <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">Unique Opportunity.</span>
-              </h2>
+          <Reveal effect="fade-up" delay={0.2}>
+            <button className="group relative px-12 py-6 bg-white text-black rounded-full text-xl md:text-2xl font-bold overflow-hidden transition-transform hover:scale-105 active:scale-95">
+              <span className="relative z-10 flex items-center gap-3">
+                Start a Project
+                <ArrowUpRight className="w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+            </button>
+          </Reveal>
+        </div>
 
-              <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                Ready to take the next step? Join us now and start transforming your vision into reality with expert support.
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-t border-white/10 pt-16 pb-16">
+
+          {/* Brand Column */}
+          <div className="md:col-span-5 flex flex-col justify-between h-full">
+            <div>
+              <h3 className="text-3xl font-bold text-white mb-6">Automatix.</h3>
+              <p className="text-gray-400 max-w-sm text-lg leading-relaxed mb-8">
+                We build digital products, brands, and experiences that connect with the people who matter most.
               </p>
+            </div>
 
-              <Button variant="primary" className="px-8 py-4 text-base rounded-full shadow-[0_0_30px_rgba(255,107,0,0.3)] hover:shadow-[0_0_50px_rgba(255,107,0,0.5)]">
-                Book an Appointment
-              </Button>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleCopyEmail}
+                  className="group flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-95"
+                >
+                  <Mail className="w-5 h-5 text-gray-300" />
+                  <span className="text-gray-300 group-hover:text-white">hello@automatix.com</span>
+                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-gray-500 group-hover:text-white opacity-0 group-hover:opacity-100 transition-all" />}
+                </button>
+              </div>
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>San Francisco, CA • {time}</span>
+              </div>
             </div>
           </div>
-        </Reveal>
 
-        {/* --- Footer Main Content --- */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-t border-white/5 pt-20">
-
-          {/* Column 1: Brand & Newsletter (4 cols) */}
-          <div className="md:col-span-4 flex flex-col gap-8">
-            <Reveal effect="fade-up" delay={0.2}>
-              <div>
-                <div className="flex items-center gap-2 text-white font-bold text-2xl mb-6">
-                  <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-300">
-                    Automatix
-                  </span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1"></div>
-                </div>
-                <p className="text-gray-500 text-sm mb-8 flex items-center gap-1.5">
-                  Made remotely with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> and passion
-                  <br />- Automatix Studio.
-                </p>
-
-                {/* Newsletter */}
-                <div className="relative max-w-xs">
-                  <input
-                    type="email"
-                    placeholder="Enter Your Email..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-32 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary/50 transition-colors"
-                  />
-                  <button className="absolute right-1 top-1 bottom-1 bg-primary hover:bg-orange-600 text-white text-xs font-bold px-4 rounded-lg transition-colors shadow-lg shadow-orange-900/20">
-                    Subscribe Us
-                  </button>
-                </div>
+          {/* Links Columns */}
+          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
+            {footerLinks.map((column, idx) => (
+              <div key={idx}>
+                <h4 className="text-white font-semibold mb-6">{column.title}</h4>
+                <ul className="space-y-4">
+                  {column.links.map((link, linkIdx) => (
+                    <li key={linkIdx}>
+                      <a
+                        href={link.href}
+                        className="text-gray-500 hover:text-white transition-colors text-base block w-fit relative group"
+                      >
+                        {link.name}
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </Reveal>
-          </div>
-
-          {/* Column 2: Template Pages (2 cols) */}
-          <div className="md:col-span-2">
-            <Reveal effect="fade-up" delay={0.3}>
-              <h4 className="text-white font-semibold mb-6">Template Pages</h4>
-              <ul className="space-y-4 text-sm text-gray-500">
-                {['Home', 'About', 'Portfolio', 'Contact', 'FAQ'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="hover:text-white transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-
-          {/* Column 3: Social (2 cols) */}
-          <div className="md:col-span-2">
-            <Reveal effect="fade-up" delay={0.4}>
-              <h4 className="text-white font-semibold mb-6">Social</h4>
-              <ul className="space-y-4 text-sm text-gray-500">
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-2"><Twitter size={16} /> Twitter (X)</a></li>
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-2"><Instagram size={16} /> Instagram</a></li>
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-2"><Youtube size={16} /> Youtube</a></li>
-                <li><a href="#" className="hover:text-white transition-colors flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L24 12H12V24L0 12H12V0Z" /></svg> Framer</a></li>
-              </ul>
-            </Reveal>
-          </div>
-
-          {/* Column 4: Sales Video (4 cols) */}
-          <div className="md:col-span-4 flex flex-col items-start md:items-end">
-            <Reveal effect="fade-up" delay={0.5} className="w-full max-w-xs">
-              <div className="w-full">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 mb-4">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span className="text-xs font-medium text-gray-300">Sales - 7,360,109</span>
-                </div>
-
-                {/* Video Thumbnail */}
-                <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group cursor-pointer">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-black"></div>
-                  {/* Abstract shapes in thumbnail */}
-                  <div className="absolute inset-0 opacity-50">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-blue-500/30 blur-xl rounded-full"></div>
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 blur-2xl rounded-full"></div>
-                  </div>
-
-                  {/* Play Button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Play className="w-5 h-5 text-white fill-white ml-1" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+            ))}
           </div>
         </div>
 
-        {/* --- Bottom Bar --- */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-12 mt-12 border-t border-white/5 text-xs text-gray-600">
-          <Reveal effect="fade-in" delay={0.6}>
-            <p>© 2024 Automatix</p>
-          </Reveal>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-gray-600 text-sm">
+            © {new Date().getFullYear()} Automatix Agency. All rights reserved.
+          </p>
 
-          <Reveal effect="fade-in" delay={0.7}>
-            <div className="flex items-center gap-8 mt-4 md:mt-0">
-              <a href="#" className="hover:text-gray-400 transition-colors">Terms & Conditions</a>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/5">
-                <span className="font-bold text-white">Made in Framer</span>
-              </div>
-            </div>
-          </Reveal>
+          <div className="flex items-center gap-6">
+            {socialLinks.map((social, idx) => (
+              <a
+                key={idx}
+                href={social.url}
+                className="text-gray-500 hover:text-white transition-colors hover:scale-110 transform duration-200"
+              >
+                <social.icon className="w-5 h-5" />
+              </a>
+            ))}
+          </div>
         </div>
+      </div>
+
+      {/* Big Text Background Overlay */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02]">
+        <h1 className="text-[20vw] font-bold text-white whitespace-nowrap leading-none select-none">
+          AUTOMATIX
+        </h1>
       </div>
     </footer>
   );

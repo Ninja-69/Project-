@@ -1,335 +1,246 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Badge from './ui/Badge';
-import { Mic, Sparkles, FileText, MousePointer2, Asterisk, Box, Layers, Zap, Bot } from 'lucide-react';
+import { Wrench, Zap, Bot, Code2, Sparkles, ArrowUpRight, Layers } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
-const CoreServices: React.FC = () => {
+interface ServiceCardProps {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  gradient: string;
+  size?: 'small' | 'medium' | 'large';
+  delay: number;
+  features?: string[];
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  title,
+  description,
+  icon: Icon,
+  gradient,
+  size = 'medium',
+  delay,
+  features = []
+}) => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setMousePos({ x, y });
+
+    // Calculate tilt
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * 10;
+    const tiltY = ((x - centerX) / centerX) * -10;
+
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const sizeClasses = {
+    small: 'md:col-span-1 md:row-span-1',
+    medium: 'md:col-span-1 md:row-span-2',
+    large: 'md:col-span-2 md:row-span-2'
+  };
+
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-900/10 blur-[150px] rounded-full pointer-events-none"></div>
+    <Reveal effect="slide-up" delay={delay} width="100%">
+      <div
+        ref={cardRef}
+        className={`group relative ${sizeClasses[size]} h-full min-h-[300px] rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.02]`}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transformStyle: 'preserve-3d'
+        }}
+      >
+        {/* Animated gradient border */}
+        <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-white/20 via-white/5 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`}></div>
+        </div>
 
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+        {/* Glow effect following cursor */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255,107,0,0.15), transparent 40%)`
+          }}
+        />
 
+        {/* Card content */}
+        <div className="relative h-full bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 flex flex-col">
+
+          {/* Icon with micro-interactions */}
+          <div className="mb-6 relative">
+            <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${gradient} relative group-hover:scale-110 transition-transform duration-500`}>
+              <Icon
+                className="w-8 h-8 text-white relative z-10 group-hover:rotate-12 transition-transform duration-500"
+              />
+              {/* Pulsing glow */}
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} blur-xl opacity-50 group-hover:opacity-100 animate-pulse transition-opacity`}></div>
+            </div>
+            {/* Sparkle effect on hover */}
+            <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-orange-500 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 animate-pulse" />
+          </div>
+
+          {/* Title */}
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent group-hover:from-white group-hover:via-white group-hover:to-white transition-all duration-300">
+            {title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-400 mb-6 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+            {description}
+          </p>
+
+          {/* Features (if provided) */}
+          {features.length > 0 && (
+            <div className="space-y-2 mb-6 flex-grow">
+              {features.map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300"
+                  style={{ transitionDelay: `${idx * 50}ms` }}
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${gradient}`}></div>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* CTA Button - reveals on hover */}
+          <div className="mt-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+            <button className={`w-full py-3 px-6 rounded-xl bg-gradient-to-r ${gradient} text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300 shadow-lg`}>
+              Learn More
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+            </button>
+          </div>
+
+          {/* Animated border glow */}
+          <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}>
+            <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${gradient} opacity-20 blur-2xl animate-pulse`}></div>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+};
+
+const CoreServices: React.FC = () => {
+  const services = [
+    {
+      title: "AI Automation",
+      description: "Transform your workflows with intelligent automation that learns and adapts to your business needs.",
+      icon: Bot,
+      gradient: "from-orange-500 to-red-600",
+      size: "large" as const,
+      delay: 0.1,
+      features: [
+        "Custom AI models",
+        "Workflow optimization",
+        "24/7 automated operations",
+        "Intelligent decision making"
+      ]
+    },
+    {
+      title: "Custom Development",
+      description: "Bespoke solutions tailored to your unique business requirements and goals.",
+      icon: Code2,
+      gradient: "from-blue-500 to-cyan-600",
+      size: "medium" as const,
+      delay: 0.2,
+      features: [
+        "Full-stack development",
+        "API integrations",
+        "Scalable architecture"
+      ]
+    },
+    {
+      title: "Process Optimization",
+      description: "Streamline operations and maximize efficiency with data-driven insights.",
+      icon: Zap,
+      gradient: "from-purple-500 to-pink-600",
+      size: "medium" as const,
+      delay: 0.3,
+      features: [
+        "Performance analytics",
+        "Bottleneck identification",
+        "Continuous improvement"
+      ]
+    },
+    {
+      title: "Integration Services",
+      description: "Seamlessly connect your tools and platforms for unified operations.",
+      icon: Wrench,
+      gradient: "from-green-500 to-emerald-600",
+      size: "small" as const,
+      delay: 0.4,
+      features: [
+        "API connections",
+        "Data synchronization"
+      ]
+    }
+  ];
+
+  return (
+    <section id="services" className="py-24 bg-black relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="flex flex-col items-start mb-24">
-          <Reveal effect="bounce-in" delay={0.1}>
-            <Badge className="mb-6 text-orange-400 border-orange-500/20 bg-orange-500/10 rounded-lg px-3 py-1 hover:bg-orange-500/20 hover:border-orange-500/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] transition-all duration-300">
-              <Layers size={14} className="mr-2" /> Services
+        <div className="flex flex-col items-center text-center mb-16">
+          <Reveal effect="fade-up">
+            <Badge>
+              <Layers size={14} className="mr-2" /> Our Services
             </Badge>
           </Reveal>
 
-          <Reveal effect="3d-flip" delay={0.2} width="100%">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
-              Our Services
+          <Reveal effect="blur-in" delay={0.2}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-6 mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
+              Expertise That Drives Quality
             </h2>
+          </Reveal>
+
+          <Reveal effect="fade-up" delay={0.4}>
+            <p className="text-gray-400 max-w-2xl text-lg">
+              With deep expertise, we deliver quality solutions that drive success and exceed industry standards consistently.
+            </p>
           </Reveal>
         </div>
 
-        <div className="flex flex-col gap-24 md:gap-40">
-
-          {/* --- 1. Chatbot Development --- */}
-          <div className="flex flex-col gap-10">
-            <Reveal effect="fade-up" delay={0.1}>
-              <div className="max-w-3xl">
-                <h3 className="text-3xl md:text-4xl font-medium mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Chatbot Development</h3>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                  We develop advanced AI-driven chatbots that handle repetitive tasks, manage data, and streamline your internal workflows to drive real results for your business.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Visual Card */}
-            <Reveal effect="slide-right" delay={0.2} width="100%">
-              <div className="w-full bg-[#050505] border border-white/10 rounded-3xl p-6 md:p-12 relative overflow-hidden hover:border-orange-500/20 hover:shadow-[0_0_40px_rgba(255,107,0,0.1)] transition-all duration-500 group">
-                <div className="max-w-2xl mx-auto flex flex-col gap-8 font-sans relative z-10">
-
-                  {/* User Input */}
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3 mb-1">
-                      <div className="w-10 h-10 rounded-full bg-orange-200 overflow-hidden border border-white/10">
-                        <img src="https://picsum.photos/seed/user_avatar/100/100" alt="User" className="w-full h-full object-cover" />
-                      </div>
-                      <span className="text-white text-base font-medium">You:</span>
-                    </div>
-                    <div className="bg-[#111] text-gray-200 px-6 py-5 rounded-2xl border border-white/5 flex items-center justify-between shadow-inner">
-                      <span className="text-base md:text-lg font-light">Please create a graph of the profits in this file</span>
-                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
-                        <FileText size={20} className="text-orange-400" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* AI Response */}
-                  <div className="flex flex-col gap-3 mt-4">
-                    <div className="flex items-center gap-2 text-orange-500 mb-1">
-                      <div className="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
-                        <Sparkles size={14} fill="currentColor" />
-                      </div>
-                      <span className="text-base font-medium text-white">AI Assistant</span>
-                    </div>
-
-                    {/* Chart Visualization */}
-                    <div className="bg-transparent pt-4 px-2">
-                      <div className="flex items-end justify-between h-40 gap-3 md:gap-6">
-                        {/* Bars */}
-                        {[20, 35, 75, 25, 40, 30, 45, 35, 40, 25, 45, 30].map((height, i) => (
-                          <div key={i} className="w-full bg-[#1a1a1a] rounded-sm relative group h-full flex items-end">
-                            {/* The highlighted bar */}
-                            {i === 2 ? (
-                              <div className="w-full bg-gradient-to-t from-orange-600 via-orange-400 to-white rounded-sm shadow-[0_0_20px_rgba(255,107,0,0.3)]" style={{ height: `${height}%` }}></div>
-                            ) : (
-                              <div className="w-full bg-[#161616] rounded-sm" style={{ height: `${height}%` }}></div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Subtle background gradient */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial-gradient from-orange-500/5 to-transparent opacity-0 group-hover:opacity-30 pointer-events-none transition-opacity duration-700"></div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* --- 2. Voice Assistants --- */}
-          <div className="flex flex-col gap-10">
-            <Reveal effect="fade-up" delay={0.1}>
-              <div className="max-w-3xl">
-                <h3 className="text-3xl md:text-4xl font-medium mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Voice Assistants</h3>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                  We develop voice assistants that use advanced natural language processing (NLP) to handle inbound and outbound calls for support, scheduling, reminders, and promotions.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Visual Card */}
-            <Reveal effect="slide-left" delay={0.2} width="100%">
-              <div className="w-full bg-[#050505] border border-white/10 rounded-3xl p-10 md:p-20 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
-
-                {/* Dot Pattern Background inside card */}
-                <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(#333 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-
-                <div className="relative z-10 flex flex-col items-center justify-center w-full">
-
-                  <div className="flex items-center justify-center gap-1.5 h-32 mb-8 w-full max-w-2xl">
-                    {/* Left Waveform */}
-                    {[20, 30, 45, 30, 55, 40, 65, 50, 75, 45, 60, 35, 20, 40, 60, 30].reverse().map((h, i) => (
-                      <div
-                        key={`l-${i}`}
-                        className="w-1 bg-gradient-to-b from-transparent via-orange-500 to-transparent rounded-full opacity-80"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-
-                    {/* Central Circle - Upgraded High Quality Icon Container */}
-                    <div className="mx-6 md:mx-10 relative flex-shrink-0">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-[#1a1a1a] to-black border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(255,107,0,0.15)] relative z-10 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50"></div>
-                        {/* Premium Mic Icon Representation */}
-                        <div className="relative z-10 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-                          <Mic size={40} strokeWidth={1.5} />
-                        </div>
-                      </div>
-                      <div className="absolute inset-0 rounded-full border border-orange-500/30 scale-125 animate-pulse-slow"></div>
-                      <div className="absolute inset-0 bg-orange-500/10 blur-2xl rounded-full"></div>
-                    </div>
-
-                    {/* Right Waveform */}
-                    {[20, 30, 45, 30, 55, 40, 65, 50, 75, 45, 60, 35, 20, 40, 60, 30].map((h, i) => (
-                      <div
-                        key={`r-${i}`}
-                        className="w-1 bg-gradient-to-b from-transparent via-orange-500 to-transparent rounded-full opacity-80"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-sm font-medium tracking-wide shadow-[0_0_20px_rgba(255,107,0,0.1)]">
-                    Active Listening...
-                  </div>
-
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* --- 3. Workflow Automations --- */}
-          <div className="flex flex-col gap-10">
-            <Reveal effect="fade-up" delay={0.1}>
-              <div className="max-w-3xl">
-                <h3 className="text-3xl md:text-4xl font-medium mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Workflow Automations</h3>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                  We streamline your processes with workflow automations that connect your favourite applications to eliminate repetitive tasks and enhance accuracy.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Visual Card */}
-            <Reveal effect="slide-right" delay={0.2} width="100%">
-              <div className="w-full bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-16 flex justify-center items-center min-h-[400px]">
-                <div className="w-full max-w-xl relative pl-8">
-
-                  {/* Step 1: Framer */}
-                  <div className="relative z-10 flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] flex items-center justify-center border border-white/10 shrink-0 shadow-lg group-hover:border-orange-500/30 transition-colors">
-                      <MousePointer2 className="text-white rotate-[-45deg]" size={28} fill="currentColor" />
-                    </div>
-                    <span className="text-white font-medium text-lg">1. New Framer form submission</span>
-                  </div>
-
-                  {/* Connector 1 - gradient line */}
-                  <div className="ml-[31px] h-20 w-[2px] bg-gradient-to-b from-[#333] via-orange-500 to-[#333] my-2 relative opacity-80"></div>
-
-                  {/* Step 2: Zapier */}
-                  <div className="relative z-10 flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] flex items-center justify-center border border-white/10 shrink-0 shadow-lg group-hover:border-orange-500/30 transition-colors">
-                      <Asterisk className="text-orange-500" size={32} />
-                    </div>
-                    <span className="text-white font-medium text-lg">2. Format & clean lead data in Zapier</span>
-                  </div>
-
-                  {/* Connector 2 */}
-                  <div className="ml-[31px] h-20 w-[2px] bg-gradient-to-b from-[#333] via-orange-500 to-[#333] my-2 relative opacity-80"></div>
-
-                  {/* Step 3: Airtable */}
-                  <div className="relative z-10 flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] flex items-center justify-center border border-white/10 shrink-0 shadow-lg group-hover:border-orange-500/30 transition-colors">
-                      <Box className="text-blue-400" size={28} />
-                    </div>
-                    <span className="text-white font-medium text-lg">3. Add lead to Airtable database</span>
-                  </div>
-
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* --- 4. AI Consulting --- */}
-          <div className="flex flex-col gap-10">
-            <Reveal effect="fade-up" delay={0.1}>
-              <div className="max-w-3xl">
-                <h3 className="text-3xl md:text-4xl font-medium mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">AI Consulting</h3>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-                  We dive into your organization to uncover AI-driven automation opportunities that can elevate your operational efficiency, quality, and speed, and reduce cost.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Visual Card - OVERHAULED GRAPH */}
-            <Reveal effect="slide-left" delay={0.2} width="100%">
-              <div className="w-full bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden flex items-center justify-center min-h-[500px]">
-
-                {/* Graph Container */}
-                <div className="relative w-full max-w-4xl h-96 bg-[#080808] rounded-2xl border border-white/5 p-8 shadow-2xl overflow-hidden">
-
-                  {/* Grid Lines */}
-                  <div className="absolute inset-8 grid grid-cols-6 grid-rows-5 gap-0 opacity-10 pointer-events-none">
-                    {Array.from({ length: 30 }).map((_, i) => (
-                      <div key={i} className="border-r border-t border-white/30 last:border-r-0"></div>
-                    ))}
-                  </div>
-
-                  {/* SVG Graph */}
-                  <svg className="absolute inset-0 w-full h-full p-8 overflow-visible" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="4" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                      </filter>
-                      <linearGradient id="efficiencyGradient" x1="0" y1="1" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#ff6b00" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#ffa04d" stopOpacity="1" />
-                      </linearGradient>
-                      <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#ff6b00" stopOpacity="0.15" />
-                        <stop offset="100%" stopColor="#ff6b00" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Line 2: Cost (Going Down) - Subtle, dashed, neutral */}
-                    <path
-                      d="M0,80 Q250,90 400,160 T800,280"
-                      fill="none"
-                      stroke="#444"
-                      strokeWidth="2"
-                      strokeDasharray="6 6"
-                      className="opacity-70"
-                    />
-
-                    {/* Line 1: Efficiency (Going Up) - Prominent, gradient, glowing */}
-                    <path
-                      d="M0,280 Q250,260 400,140 T800,40"
-                      fill="none"
-                      stroke="url(#efficiencyGradient)"
-                      strokeWidth="5"
-                      strokeLinecap="round"
-                      filter="url(#glow)"
-                      className="drop-shadow-lg"
-                    />
-
-                    {/* Area under Efficiency curve */}
-                    <path
-                      d="M0,280 Q250,260 400,140 T800,40 V320 H0 Z"
-                      fill="url(#areaGradient)"
-                      className="opacity-60"
-                    />
-
-                    {/* Data Points */}
-                    {/* Point 1: Efficiency End */}
-                    <circle cx="800" cy="40" r="8" fill="#ff6b00" stroke="white" strokeWidth="2" className="animate-pulse shadow-[0_0_15px_#ff6b00]" />
-
-                    {/* Point 2: Cost End */}
-                    <circle cx="800" cy="280" r="5" fill="#444" stroke="#222" strokeWidth="2" />
-                  </svg>
-
-                  {/* Floating Metric Card: Efficiency - Better Integration */}
-                  <div className="absolute top-[20px] right-[40px] bg-[#111]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] animate-float-slow z-20 hover:border-orange-500/30 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-2 h-2 rounded-full bg-orange-500 box-shadow-[0_0_8px_orange]"></div>
-                      <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">Efficiency</span>
-                    </div>
-                    <div className="text-3xl font-bold text-white flex items-center gap-2">
-                      +48%
-                      <span className="text-xs text-green-400 bg-green-500/10 border border-green-500/20 px-1.5 py-0.5 rounded flex items-center">
-                        ↗
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Floating Metric Card: Cost - Better Integration */}
-                  <div className="absolute bottom-[30px] right-[120px] bg-[#111]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] animate-float-medium z-20 hover:border-white/20 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-2 h-2 rounded-full bg-gray-500"></div>
-                      <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">Cost</span>
-                    </div>
-                    <div className="text-2xl font-bold text-gray-300 flex items-center gap-2">
-                      -11%
-                      <span className="text-xs text-green-400 bg-green-500/10 border border-green-500/20 px-1.5 py-0.5 rounded flex items-center">
-                        ↘
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* X-Axis Labels */}
-                  <div className="absolute bottom-0 left-0 right-0 flex justify-between px-8 py-2 text-xs font-mono text-gray-600 uppercase tracking-widest z-10">
-                    <span>Jan</span>
-                    <span>Feb</span>
-                    <span>Mar</span>
-                    <span>Apr</span>
-                    <span>May</span>
-                    <span>Jun</span>
-                  </div>
-
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(300px,auto)] gap-6 max-w-7xl mx-auto">
+          {services.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
         </div>
+
+        {/* Bottom CTA */}
+        <Reveal effect="fade-up" delay={0.6}>
+          <div className="text-center mt-16">
+            <p className="text-gray-400 mb-6">
+              Need something custom? We've got you covered.
+            </p>
+            <button className="px-8 py-4 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:shadow-[0_0_60px_rgba(255,107,0,0.5)]">
+              Discuss Your Project
+            </button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

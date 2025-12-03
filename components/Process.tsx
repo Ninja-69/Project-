@@ -50,6 +50,7 @@ const codeSnippet = `class AutoWorkflow {
 export default function Process() {
     const [activeStep, setActiveStep] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const [progress, setProgress] = useState(0);
     const [typedCode, setTypedCode] = useState('');
     const [efficiencyScore, setEfficiencyScore] = useState(0);
@@ -61,6 +62,7 @@ export default function Process() {
     const efficiencyIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const revenueIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const lastTimestampRef = useRef<number>(0);
+    const sectionRef = useRef<HTMLElement>(null);
 
     // Cleanup all intervals
     const cleanupIntervals = useCallback(() => {
@@ -90,6 +92,31 @@ export default function Process() {
         lastTimestampRef.current = 0;
     }, [cleanupIntervals]);
 
+    // Intersection Observer to detect when section is visible
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+                // Reset to step 0 when section becomes visible
+                if (entry.isIntersecting && !isVisible) {
+                    setActiveStep(0);
+                    setProgress(0);
+                }
+            },
+            { threshold: 0.3 } // Trigger when 30% of section is visible
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, [isVisible]);
+
     // Keyboard navigation
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
@@ -104,9 +131,9 @@ export default function Process() {
         return () => window.removeEventListener('keydown', handleKeyPress);
     }, [activeStep, handleStepClick]);
 
-    // Smooth progress animation using requestAnimationFrame (60 FPS)
+    // Smooth progress animation using requestAnimationFrame (60 FPS) - ONLY when visible
     useEffect(() => {
-        if (isPaused) {
+        if (isPaused || !isVisible) {
             if (progressAnimationRef.current) {
                 cancelAnimationFrame(progressAnimationRef.current);
                 progressAnimationRef.current = null;
@@ -142,7 +169,7 @@ export default function Process() {
                 cancelAnimationFrame(progressAnimationRef.current);
             }
         };
-    }, [isPaused, activeStep]);
+    }, [isPaused, activeStep, isVisible]);
 
     // Animation Effects based on Active Step
     useEffect(() => {
@@ -445,7 +472,7 @@ export default function Process() {
     };
 
     return (
-        <section className="py-24 bg-black relative overflow-hidden" id="process">
+        <section ref={sectionRef} className="py-24 bg-black relative overflow-hidden" id="process">
             {/* Background Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
