@@ -95,6 +95,8 @@ const Integrations: React.FC = () => {
                   </p>
               </div>
 
+
+
               {/* Connection Beams (Decoration) */}
               <div className="absolute inset-0 pointer-events-none">
                   <svg className="w-full h-full opacity-20">

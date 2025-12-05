@@ -15,11 +15,12 @@ import CoreServices from './components/CoreServices';
 import Process from './components/Process';
 import Work from './components/Work';
 import Booking from './components/Booking';
+import NexilyCaseStudy from './components/NexilyCaseStudy';
 import PrivacyPolicy from './components/legal/PrivacyPolicy';
 import TermsOfService from './components/legal/TermsOfService';
 import CookiePolicy from './components/legal/CookiePolicy';
 
-type ViewState = 'home' | 'work' | 'booking' | 'privacy' | 'terms' | 'cookies';
+type ViewState = 'home' | 'work' | 'booking' | 'nexily-case-study' | 'privacy' | 'terms' | 'cookies';
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
@@ -51,9 +52,15 @@ function App() {
             <Contact />
           </>
         ) : currentView === 'work' ? (
-          <Work onBack={() => setCurrentView('home')} />
+          <Work onBack={() => setCurrentView('home')} onViewCaseStudy={(projectId) => {
+            if (projectId === 'nexily') {
+              setCurrentView('nexily-case-study');
+            }
+          }} />
         ) : currentView === 'booking' ? (
-          <Booking onBack={() => setCurrentView('home')} />
+          <Booking />
+        ) : currentView === 'nexily-case-study' ? (
+          <NexilyCaseStudy onBack={() => setCurrentView('work')} />
         ) : currentView === 'privacy' ? (
           <PrivacyPolicy onBack={() => setCurrentView('home')} />
         ) : currentView === 'terms' ? (

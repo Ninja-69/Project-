@@ -116,9 +116,10 @@ const projects: Project[] = [
 
 interface WorkProps {
     onBack: () => void;
+    onViewCaseStudy?: (projectId: string) => void;
 }
 
-const Work: React.FC<WorkProps> = ({ onBack }) => {
+const Work: React.FC<WorkProps> = ({ onBack, onViewCaseStudy }) => {
     const [playing, setPlaying] = useState<string | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -284,7 +285,15 @@ const Work: React.FC<WorkProps> = ({ onBack }) => {
                                     </div>
 
                                     {/* CTA / Audio Player */}
-                                    {project.hasAudio ? (
+                                    {project.id === 'nexily' ? (
+                                        <button
+                                            onClick={() => onViewCaseStudy?.('nexily')}
+                                            className="inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold bg-white text-black hover:bg-gray-200 transition-all duration-300"
+                                        >
+                                            <BarChart3 className="w-5 h-5" />
+                                            <span>{project.linkText}</span>
+                                        </button>
+                                    ) : project.hasAudio ? (
                                         <button
                                             onClick={() => togglePlay(project)}
                                             className={`inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${playing === project.id ? 'bg-orange-500 text-white shadow-[0_0_20px_rgba(255,107,0,0.4)]' : 'bg-white text-black hover:bg-gray-200'}`}
