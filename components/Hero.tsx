@@ -71,7 +71,7 @@ const Hero: React.FC<{ onViewWork?: () => void; onBookCall?: () => void }> = ({ 
     { name: 'Figma', icon: Logos.Figma },
     { name: 'Notion', icon: Logos.Notion },
     { name: 'Supabase', icon: Logos.Supabase },
-    { name: 'n8n', icon: Logos.n8n },
+    { name: 'AWS', icon: Logos.Supabase },
     { name: 'Slack', icon: Logos.Slack },
     { name: 'Docker', icon: Logos.Docker },
     { name: 'Tailwind', icon: Logos.Tailwind },
@@ -157,9 +157,9 @@ const Hero: React.FC<{ onViewWork?: () => void; onBookCall?: () => void }> = ({ 
           </div>
         </Reveal>
 
-        {/* Marquee Section - Pushed to absolute bottom to avoid gap */}
+        {/* Marquee Section - Smooth fade transition */}
         <Reveal effect="fade-in" duration={1} delay={0.6} className="w-full mt-auto">
-          <div className="w-full relative border-t border-white/5 pt-8 pb-6 bg-gradient-to-b from-transparent to-black/80">
+          <div className="w-full relative pt-12 pb-8 bg-gradient-to-b from-black/0 via-black/40 to-black/80 backdrop-blur-sm">
             <p className="text-xs md:text-sm text-gray-500 mb-8 uppercase tracking-[0.3em] font-semibold">Trusted by Innovative Companies</p>
 
             <div className="w-full overflow-hidden relative mask-linear-gradient">
