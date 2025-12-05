@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Instagram, Twitter, Youtube, Github, Linkedin, Mail, MapPin, ArrowUpRight, Copy, Check } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateLegal?: (view: 'privacy' | 'terms' | 'cookies') => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
   const [email, setEmail] = useState('');
   const [copied, setCopied] = useState(false);
   const [time, setTime] = useState('');
@@ -56,9 +60,9 @@ const Footer: React.FC = () => {
     {
       title: 'Legal',
       links: [
-        { name: 'Privacy Policy', href: '#' },
-        { name: 'Terms of Service', href: '#' },
-        { name: 'Cookie Policy', href: '#' },
+        { name: 'Privacy Policy', href: 'privacy' },
+        { name: 'Terms of Service', href: 'terms' },
+        { name: 'Cookie Policy', href: 'cookies' },
       ]
     }
   ];
@@ -139,6 +143,12 @@ const Footer: React.FC = () => {
                     <li key={linkIdx}>
                       <a
                         href={link.href}
+                        onClick={(e) => {
+                          if (column.title === 'Legal' && onNavigateLegal) {
+                            e.preventDefault();
+                            onNavigateLegal(link.href as 'privacy' | 'terms' | 'cookies');
+                          }
+                        }}
                         className="text-gray-500 hover:text-white transition-colors text-base block w-fit relative group"
                       >
                         {link.name}

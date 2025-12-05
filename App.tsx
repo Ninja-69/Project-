@@ -15,11 +15,14 @@ import CoreServices from './components/CoreServices';
 import Process from './components/Process';
 import Work from './components/Work';
 import Booking from './components/Booking';
+import PrivacyPolicy from './components/legal/PrivacyPolicy';
+import TermsOfService from './components/legal/TermsOfService';
+import CookiePolicy from './components/legal/CookiePolicy';
 
-
+type ViewState = 'home' | 'work' | 'booking' | 'privacy' | 'terms' | 'cookies';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'work' | 'booking'>('home');
+  const [currentView, setCurrentView] = useState<ViewState>('home');
 
   // Scroll to top when view changes
   useEffect(() => {
@@ -49,11 +52,17 @@ function App() {
           </>
         ) : currentView === 'work' ? (
           <Work onBack={() => setCurrentView('home')} />
-        ) : (
+        ) : currentView === 'booking' ? (
           <Booking onBack={() => setCurrentView('home')} />
-        )}
+        ) : currentView === 'privacy' ? (
+          <PrivacyPolicy onBack={() => setCurrentView('home')} />
+        ) : currentView === 'terms' ? (
+          <TermsOfService onBack={() => setCurrentView('home')} />
+        ) : currentView === 'cookies' ? (
+          <CookiePolicy onBack={() => setCurrentView('home')} />
+        ) : null}
       </main>
-      <Footer />
+      <Footer onNavigateLegal={(view) => setCurrentView(view)} />
     </div>
   );
 }
