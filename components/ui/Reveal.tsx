@@ -42,6 +42,13 @@ export const Reveal: React.FC<RevealProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check for prefers-reduced-motion
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+  }, []);
 
   useEffect(() => {
     // Check if element is already in viewport on mount (for hero section)
@@ -197,8 +204,8 @@ export const Reveal: React.FC<RevealProps> = ({
       ref={ref} 
       className={`${className} transition-all ${isVisible ? getVisibleClass() : getEffectClass()}`}
       style={{ 
-        transitionDuration: `${duration}s`, 
-        transitionDelay: `${delay}s`,
+        transitionDuration: prefersReducedMotion ? '0s' : `${duration}s`, 
+        transitionDelay: prefersReducedMotion ? '0s' : `${delay}s`,
         transitionTimingFunction: getEasing(),
         width: width,
         willChange: 'transform, opacity, filter',

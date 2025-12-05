@@ -62,7 +62,7 @@ const Logos = {
   )
 };
 
-const Hero: React.FC<{ onViewWork?: () => void }> = ({ onViewWork }) => {
+const Hero: React.FC<{ onViewWork?: () => void; onBookCall?: () => void }> = ({ onViewWork, onBookCall }) => {
   const companies = [
     { name: 'OpenAI', icon: Logos.OpenAI },
     { name: 'GitHub', icon: Logos.GitHub },
@@ -139,7 +139,11 @@ const Hero: React.FC<{ onViewWork?: () => void }> = ({ onViewWork }) => {
         {/* CTA Buttons - Scale In */}
         <Reveal effect="zoom-in" duration={0.6} delay={0.5}>
           <div className="flex flex-col sm:flex-row items-center gap-4 mb-12 md:mb-16 w-full sm:w-auto">
-            <Button variant="primary" className="w-full sm:w-auto px-10 py-4 text-lg rounded-full shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] hover:scale-105 transition-all duration-300">
+            <Button
+              variant="primary"
+              onClick={onBookCall}
+              className="w-full sm:w-auto px-10 py-4 text-lg rounded-full shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] hover:scale-105 transition-all duration-300"
+            >
               Book a Call
             </Button>
             <Button

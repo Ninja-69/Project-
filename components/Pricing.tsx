@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Check, MessageSquare, Coins } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
-const Pricing: React.FC = () => {
+const Pricing: React.FC<{ onBookCall?: () => void }> = ({ onBookCall }) => {
   const [isAnnual, setIsAnnual] = useState(false);
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
 
@@ -156,7 +156,10 @@ const Pricing: React.FC = () => {
                 </p>
 
                 {/* Action Button */}
-                <button className="w-full py-4 px-6 mb-8 bg-[#141414] border border-[#2A2A2A] border-b-[3px] border-b-[#D4896B] rounded-xl text-white font-semibold uppercase tracking-wider text-sm hover:border-b-[#FF9800] hover:bg-[#1A1A1A] transition-all duration-300 shadow-lg relative overflow-hidden group-hover:shadow-orange-900/20">
+                <button
+                  onClick={onBookCall}
+                  className="w-full py-4 px-6 mb-8 bg-[#141414] border border-[#2A2A2A] border-b-[3px] border-b-[#D4896B] rounded-xl text-white font-semibold uppercase tracking-wider text-sm hover:border-b-[#FF9800] hover:bg-[#1A1A1A] transition-all duration-300 shadow-lg relative overflow-hidden group-hover:shadow-orange-900/20"
+                >
                   Book a call
                 </button>
 

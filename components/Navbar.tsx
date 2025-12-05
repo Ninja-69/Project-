@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onLogoClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onLogoClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,12 +29,16 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <button 
+          onClick={onLogoClick}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+          aria-label="Go to home"
+        >
           <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-300">
             Automatix
           </span>
           <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1"></div>
-        </div>
+        </button>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 bg-white/5 px-8 py-2.5 rounded-full border border-white/5 backdrop-blur-sm">

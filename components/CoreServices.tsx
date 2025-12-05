@@ -1,246 +1,286 @@
-import React, { useState, useRef } from 'react';
-import Badge from './ui/Badge';
-import { Wrench, Zap, Bot, Code2, Sparkles, ArrowUpRight, Layers } from 'lucide-react';
+import React from 'react';
+import { Bot, FileText, Mic, Zap, Database, Layout, ArrowUp, ArrowDown, TrendingUp, Layers } from 'lucide-react';
 import Reveal from './ui/Reveal';
-
-interface ServiceCardProps {
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  gradient: string;
-  size?: 'small' | 'medium' | 'large';
-  delay: number;
-  features?: string[];
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  title,
-  description,
-  icon: Icon,
-  gradient,
-  size = 'medium',
-  delay,
-  features = []
-}) => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    setMousePos({ x, y });
-
-    // Calculate tilt
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const tiltX = ((y - centerY) / centerY) * 10;
-    const tiltY = ((x - centerX) / centerX) * -10;
-
-    setTilt({ x: tiltX, y: tiltY });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-  };
-
-  const sizeClasses = {
-    small: 'md:col-span-1 md:row-span-1',
-    medium: 'md:col-span-1 md:row-span-2',
-    large: 'md:col-span-2 md:row-span-2'
-  };
-
-  return (
-    <Reveal effect="slide-up" delay={delay} width="100%">
-      <div
-        ref={cardRef}
-        className={`group relative ${sizeClasses[size]} h-full min-h-[300px] rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.02]`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-          transformStyle: 'preserve-3d'
-        }}
-      >
-        {/* Animated gradient border */}
-        <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-white/20 via-white/5 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`}></div>
-        </div>
-
-        {/* Glow effect following cursor */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255,107,0,0.15), transparent 40%)`
-          }}
-        />
-
-        {/* Card content */}
-        <div className="relative h-full bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 flex flex-col">
-
-          {/* Icon with micro-interactions */}
-          <div className="mb-6 relative">
-            <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${gradient} relative group-hover:scale-110 transition-transform duration-500`}>
-              <Icon
-                className="w-8 h-8 text-white relative z-10 group-hover:rotate-12 transition-transform duration-500"
-              />
-              {/* Pulsing glow */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} blur-xl opacity-50 group-hover:opacity-100 animate-pulse transition-opacity`}></div>
-            </div>
-            {/* Sparkle effect on hover */}
-            <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-orange-500 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 animate-pulse" />
-          </div>
-
-          {/* Title */}
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent group-hover:from-white group-hover:via-white group-hover:to-white transition-all duration-300">
-            {title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-gray-400 mb-6 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-            {description}
-          </p>
-
-          {/* Features (if provided) */}
-          {features.length > 0 && (
-            <div className="space-y-2 mb-6 flex-grow">
-              {features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300"
-                  style={{ transitionDelay: `${idx * 50}ms` }}
-                >
-                  <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${gradient}`}></div>
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* CTA Button - reveals on hover */}
-          <div className="mt-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-            <button className={`w-full py-3 px-6 rounded-xl bg-gradient-to-r ${gradient} text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300 shadow-lg`}>
-              Learn More
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-            </button>
-          </div>
-
-          {/* Animated border glow */}
-          <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}>
-            <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${gradient} opacity-20 blur-2xl animate-pulse`}></div>
-          </div>
-        </div>
-      </div>
-    </Reveal>
-  );
-};
+import Badge from './ui/Badge';
 
 const CoreServices: React.FC = () => {
-  const services = [
-    {
-      title: "AI Automation",
-      description: "Transform your workflows with intelligent automation that learns and adapts to your business needs.",
-      icon: Bot,
-      gradient: "from-orange-500 to-red-600",
-      size: "large" as const,
-      delay: 0.1,
-      features: [
-        "Custom AI models",
-        "Workflow optimization",
-        "24/7 automated operations",
-        "Intelligent decision making"
-      ]
-    },
-    {
-      title: "Custom Development",
-      description: "Bespoke solutions tailored to your unique business requirements and goals.",
-      icon: Code2,
-      gradient: "from-blue-500 to-cyan-600",
-      size: "medium" as const,
-      delay: 0.2,
-      features: [
-        "Full-stack development",
-        "API integrations",
-        "Scalable architecture"
-      ]
-    },
-    {
-      title: "Process Optimization",
-      description: "Streamline operations and maximize efficiency with data-driven insights.",
-      icon: Zap,
-      gradient: "from-purple-500 to-pink-600",
-      size: "medium" as const,
-      delay: 0.3,
-      features: [
-        "Performance analytics",
-        "Bottleneck identification",
-        "Continuous improvement"
-      ]
-    },
-    {
-      title: "Integration Services",
-      description: "Seamlessly connect your tools and platforms for unified operations.",
-      icon: Wrench,
-      gradient: "from-green-500 to-emerald-600",
-      size: "small" as const,
-      delay: 0.4,
-      features: [
-        "API connections",
-        "Data synchronization"
-      ]
-    }
-  ];
-
   return (
-    <section id="services" className="py-24 bg-black relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <section id="services" className="py-24 bg-black text-white relative overflow-hidden">
+      <div className="container mx-auto px-6 max-w-5xl">
 
-      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="mb-24">
           <Reveal effect="fade-up">
-            <Badge>
-              <Layers size={14} className="mr-2" /> Our Services
+            <Badge className="mb-6 text-orange-400 border-orange-500/20 bg-orange-500/10">
+              <Layers size={14} className="mr-2" /> Services
             </Badge>
           </Reveal>
-
-          <Reveal effect="blur-in" delay={0.2}>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-6 mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
-              Expertise That Drives Quality
+          <Reveal effect="fade-up" delay={0.1}>
+            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
+              Our Services
             </h2>
           </Reveal>
-
-          <Reveal effect="fade-up" delay={0.4}>
-            <p className="text-gray-400 max-w-2xl text-lg">
-              With deep expertise, we deliver quality solutions that drive success and exceed industry standards consistently.
-            </p>
-          </Reveal>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(300px,auto)] gap-6 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
-          ))}
-        </div>
+        <div className="space-y-32">
 
-        {/* Bottom CTA */}
-        <Reveal effect="fade-up" delay={0.6}>
-          <div className="text-center mt-16">
-            <p className="text-gray-400 mb-6">
-              Need something custom? We've got you covered.
-            </p>
-            <button className="px-8 py-4 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:shadow-[0_0_60px_rgba(255,107,0,0.5)]">
-              Discuss Your Project
-            </button>
+          {/* 1. Chatbot Development */}
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Chatbot Development</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We develop advanced AI-driven chatbots that handle repetitive tasks, manage data, and streamline your internal workflows to drive real results for your business.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex flex-col justify-center">
+                {/* Chat Interface */}
+                <div className="max-w-2xl mx-auto w-full space-y-8">
+
+                  {/* User Message */}
+                  <div className="flex items-start gap-4 justify-end">
+                    <div className="bg-[#1A1A1A] text-gray-200 px-6 py-4 rounded-2xl rounded-tr-sm max-w-md flex items-center gap-3 border border-white/5">
+                      <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center">
+                        <span className="text-xs font-bold text-orange-500">You</span>
+                      </div>
+                      <span>Please create a graph of the profits in this file</span>
+                      <FileText size={18} className="text-orange-500 ml-2" />
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/10 flex-shrink-0">
+                      <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" alt="User" className="w-full h-full rounded-full object-cover opacity-80" />
+                    </div>
+                  </div>
+
+                  {/* AI Response */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.3)]">
+                      <Bot size={20} className="text-white" />
+                    </div>
+                    <div className="space-y-2 w-full max-w-lg">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-orange-500">AI Assistant</span>
+                      </div>
+
+                      {/* Bar Chart Visual */}
+                      <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-6 w-full">
+                        <div className="flex items-end justify-between h-32 gap-2 md:gap-4 px-2">
+                          {[30, 45, 25, 60, 40, 75, 50, 80, 45, 60].map((height, i) => (
+                            <div key={i} className="w-full bg-[#1A1A1A] rounded-t-sm relative group/bar transition-all duration-500 hover:bg-[#252525]" style={{ height: `${height}%` }}>
+                              {i === 2 && ( // Highlighted bar
+                                <div className="absolute inset-0 bg-gradient-to-t from-orange-600 to-orange-400 shadow-[0_0_20px_rgba(255,107,0,0.3)]"></div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+
+          {/* 2. AI Consulting */}
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">AI Consulting</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We dive into your organization to uncover AI-driven automation opportunities that can elevate your operational efficiency, quality, and speed, and reduce cost.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px]">
+                {/* Graph Container */}
+                <div className="relative h-[300px] w-full mt-8">
+                  {/* Grid Lines */}
+                  <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 border-l border-b border-white/5">
+                    {[...Array(24)].map((_, i) => (
+                      <div key={i} className="border-r border-t border-white/5"></div>
+                    ))}
+                  </div>
+
+                  {/* SVG Lines */}
+                  <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="graphGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Gradient Fill Area (Under the curve) */}
+                    <path
+                      d="M0,280 C200,270 300,200 500,150 C700,100 800,90 900,80 V300 H0 Z"
+                      fill="url(#graphGradient)"
+                      className="opacity-0 animate-fade-in"
+                      style={{ animationDelay: '1s', animationFillMode: 'forwards', animationDuration: '1s' }}
+                    />
+
+                    {/* Dotted Line (Cost) - Animated */}
+                    <path
+                      d="M0,150 C100,150 200,180 300,220 C400,260 500,280 800,290"
+                      fill="none"
+                      stroke="#333"
+                      strokeWidth="2"
+                      strokeDasharray="6 6"
+                      className="animate-draw"
+                      style={{ opacity: 0.5 }}
+                    />
+
+                    {/* Solid Line (Efficiency) - Animated */}
+                    <path
+                      d="M0,280 C200,270 300,200 500,150 C700,100 800,90 900,80"
+                      fill="none"
+                      stroke="#FF6B00"
+                      strokeWidth="3"
+                      className="drop-shadow-[0_0_10px_rgba(255,107,0,0.5)] animate-draw"
+                    />
+
+                    {/* End Point Dot with Pulse */}
+                    <g className="animate-fade-in" style={{ animationDelay: '1.8s', opacity: 0, animationFillMode: 'forwards' }}>
+                      <circle cx="900" cy="80" r="6" fill="#000" stroke="#FF6B00" strokeWidth="3" />
+                      <circle cx="900" cy="80" r="12" fill="none" stroke="#FF6B00" strokeWidth="1" className="animate-ping opacity-50" />
+                      <circle cx="900" cy="80" r="20" fill="none" stroke="#FF6B00" strokeWidth="0.5" className="animate-pulse-slow opacity-30" />
+                    </g>
+                  </svg>
+
+                  {/* Floating Badges */}
+                  <div className="absolute top-[20%] right-[15%] bg-[#111] border border-white/10 rounded-xl p-4 shadow-2xl animate-float">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                      <span className="text-xs text-gray-400 uppercase tracking-wider">Efficiency</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold text-white">+48%</span>
+                      <div className="bg-green-500/20 p-1 rounded">
+                        <TrendingUp size={16} className="text-green-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-[10%] right-[25%] bg-[#111] border border-white/10 rounded-xl p-4 shadow-2xl animate-float" style={{ animationDelay: '1s' }}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                      <span className="text-xs text-gray-400 uppercase tracking-wider">Cost</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold text-white">-11%</span>
+                      <div className="bg-green-500/20 p-1 rounded">
+                        <ArrowDown size={16} className="text-green-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* X-Axis Labels */}
+                  <div className="absolute bottom-[-40px] left-0 w-full flex justify-between text-xs text-gray-600 font-mono uppercase px-4">
+                    <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* 3. Voice Assistants */}
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Voice Assistants</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We develop voice assistants that use advanced natural language processing (NLP) to handle inbound and outbound calls for support, scheduling, reminders, and promotions.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex items-center justify-center">
+                <div className="relative flex items-center justify-center w-full max-w-2xl">
+
+                  {/* Left Waveform */}
+                  <div className="flex items-center gap-1 h-16 opacity-50">
+                    {[...Array(15)].map((_, i) => (
+                      <div key={`l-${i}`} className="w-1 bg-orange-500 rounded-full animate-pulse" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                    ))}
+                  </div>
+
+                  {/* Central Mic */}
+                  <div className="relative mx-8 z-10">
+                    <div className="w-24 h-24 rounded-full bg-[#111] border border-white/10 flex items-center justify-center shadow-[0_0_50px_rgba(255,107,0,0.15)] relative">
+                      <div className="absolute inset-0 rounded-full border border-orange-500/30 animate-ping opacity-20"></div>
+                      <Mic size={32} className="text-white" />
+                    </div>
+                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                      <span className="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-xs font-medium">
+                        Active Listening...
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Waveform */}
+                  <div className="flex items-center gap-1 h-16 opacity-50">
+                    {[...Array(15)].map((_, i) => (
+                      <div key={`r-${i}`} className="w-1 bg-orange-500 rounded-full animate-pulse" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* 4. Workflow Automations */}
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Workflow Automations</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We streamline your processes with workflow automations that connect your favourite applications to eliminate repetitive tasks and enhance accuracy.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex items-center justify-center">
+
+                <div className="flex flex-col relative z-10 max-w-lg w-full">
+
+                  {/* Step 1 */}
+                  <div className="flex gap-6 group/step">
+                    <div className="flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover/step:border-white/30 transition-colors z-10">
+                        <Layout size={24} className="text-white" />
+                      </div>
+                      <div className="h-12 w-[1px] bg-gradient-to-b from-white/10 to-orange-500/50 my-1"></div>
+                    </div>
+                    <span className="text-lg text-gray-300 font-medium py-3">1. New Framer form submission</span>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="flex gap-6 group/step">
+                    <div className="flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-orange-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(255,107,0,0.1)] z-10">
+                        <Zap size={24} className="text-orange-500" />
+                      </div>
+                      <div className="h-12 w-[1px] bg-gradient-to-b from-orange-500/50 to-white/10 my-1"></div>
+                    </div>
+                    <span className="text-lg text-white font-medium py-3">2. Format & clean lead data in Zapier</span>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex gap-6 group/step">
+                    <div className="flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover/step:border-white/30 transition-colors z-10">
+                        <Database size={24} className="text-blue-400" />
+                      </div>
+                    </div>
+                    <span className="text-lg text-gray-300 font-medium py-3">3. Add lead to Airtable database</span>
+                  </div>
+
+                </div>
+
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
       </div>
     </section>
   );
