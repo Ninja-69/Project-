@@ -34,49 +34,30 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex flex-col justify-center">
-                {/* Chat Interface */}
-                <div className="max-w-2xl mx-auto w-full space-y-8">
-
-                  {/* User Message */}
-                  <div className="flex items-start gap-4 justify-end">
-                    <div className="bg-[#1A1A1A] text-gray-200 px-6 py-4 rounded-2xl rounded-tr-sm max-w-md flex items-center gap-3 border border-white/5">
-                      <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center">
-                        <span className="text-xs font-bold text-orange-500">You</span>
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  {/* Chat Animation */}
+                  <div className="max-w-2xl mx-auto w-full space-y-6">
+                    {/* User Message */}
+                    <div className="flex items-start gap-4 justify-end animate-fade-in-up" style={{ animationDelay: '0s' }}>
+                      <div className="bg-gradient-to-br from-orange-500/30 to-orange-600/20 border border-orange-500/50 rounded-2xl px-4 py-3 max-w-xs shadow-lg">
+                        <p className="text-gray-100 text-sm font-medium">Please create a graph of the profits in this file</p>
                       </div>
-                      <span>Please create a graph of the profits in this file</span>
-                      <FileText size={18} className="text-orange-500 ml-2" />
                     </div>
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/10 flex-shrink-0">
-                      <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" alt="User" className="w-full h-full rounded-full object-cover opacity-80" />
-                    </div>
-                  </div>
 
-                  {/* AI Response */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.3)]">
-                      <Bot size={20} className="text-white" />
-                    </div>
-                    <div className="space-y-2 w-full max-w-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-medium text-orange-500">AI Assistant</span>
+                    {/* AI Response */}
+                    <div className="flex items-start gap-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.3)]">
+                        <Bot size={20} className="text-white" />
                       </div>
-
-                      {/* Bar Chart Visual */}
-                      <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-6 w-full">
-                        <div className="flex items-end justify-between h-32 gap-2 md:gap-4 px-2">
-                          {[30, 45, 25, 60, 40, 75, 50, 80, 45, 60].map((height, i) => (
-                            <div key={i} className="w-full bg-[#1A1A1A] rounded-t-sm relative group/bar transition-all duration-500 hover:bg-[#252525]" style={{ height: `${height}%` }}>
-                              {i === 2 && ( // Highlighted bar
-                                <div className="absolute inset-0 bg-gradient-to-t from-orange-600 to-orange-400 shadow-[0_0_20px_rgba(255,107,0,0.3)]"></div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
+                      <div className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 max-w-xs">
+                        <p className="text-gray-200 text-sm leading-relaxed">
+                          <span className="font-semibold text-white">Done!</span> I've generated your profit graph. Revenue is up 48% this quarter.
+                        </p>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </Reveal>
@@ -92,9 +73,11 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-gradient-to-br from-[#050505] to-[#0a0a0a] border border-white/10 rounded-3xl p-6 md:p-12 relative overflow-hidden min-h-[500px]">
-                {/* Premium Graph Container */}
-                <div className="relative h-[350px] w-full mt-8">
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-6 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  {/* Premium Graph Container */}
+                  <div className="relative h-[350px] w-full mt-8">
                   {/* Animated Grid Background */}
                   <div className="absolute inset-0 opacity-30">
                     <svg className="w-full h-full" preserveAspectRatio="none">
@@ -221,6 +204,7 @@ const CoreServices: React.FC = () => {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -235,22 +219,23 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[500px] flex flex-col items-center justify-center">
-                <div className="relative flex flex-col items-center justify-center w-full max-w-2xl gap-8">
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10 flex flex-col items-center justify-center w-full gap-12">
 
                   {/* Waveform Visualization */}
-                  <div className="flex items-center justify-center gap-1 h-20">
+                  <div className="flex items-center justify-center gap-1 h-24">
                     {[...Array(20)].map((_, i) => (
-                      <div key={`wave-${i}`} className="w-1.5 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${30 + Math.sin(i * 0.5) * 40}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
+                      <div key={`wave-${i}`} className="w-2 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${30 + Math.sin(i * 0.5) * 40}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
                     ))}
                   </div>
 
                   {/* Central Mic with Glow */}
                   <div className="relative">
-                    <div className="absolute inset-0 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl animate-pulse"></div>
-                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-orange-600 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(255,107,0,0.4)] border-2 border-orange-400/50">
-                      <div className="absolute inset-2 rounded-full border-2 border-orange-300/30 animate-spin" style={{ animationDuration: '3s' }}></div>
-                      <Mic size={48} className="text-white relative z-10 animate-pulse" />
+                    <div className="absolute inset-0 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div className="relative w-40 h-40 rounded-full bg-gradient-to-br from-orange-600 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(255,107,0,0.5)] border-2 border-orange-400/50 group-hover:shadow-[0_0_80px_rgba(255,107,0,0.7)] transition-all duration-300">
+                      <div className="absolute inset-3 rounded-full border-2 border-orange-300/30 animate-spin" style={{ animationDuration: '3s' }}></div>
+                      <Mic size={64} className="text-white relative z-10 animate-pulse" />
                     </div>
                   </div>
 
@@ -260,45 +245,6 @@ const CoreServices: React.FC = () => {
                       <span className="text-orange-300 text-sm font-semibold animate-pulse">🎙️ Listening...</span>
                     </div>
                     <p className="text-gray-400 text-sm">Real-time voice processing with AI intelligence</p>
-                  </div>
-
-                  {/* Premium Chat Simulation */}
-                  <div className="w-full max-w-md space-y-4 mt-8 bg-gradient-to-b from-white/5 to-transparent rounded-2xl p-4 border border-white/10">
-                    {/* User Message */}
-                    <div className="flex justify-end animate-fade-in-up" style={{ animationDelay: '0s' }}>
-                      <div className="group relative max-w-xs">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-orange-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-                        <div className="relative bg-gradient-to-br from-orange-500/30 to-orange-600/20 border border-orange-500/50 rounded-2xl px-4 py-3 shadow-lg hover:shadow-[0_0_20px_rgba(255,107,0,0.3)] transition-all">
-                          <p className="text-gray-100 text-sm font-medium">Can you help me track my order?</p>
-                          <span className="text-xs text-gray-400 mt-1 block">Just now</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Typing Indicator */}
-                    <div className="flex justify-start animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                      <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0s' }}></div>
-                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-                        </div>
-                        <span className="text-xs text-gray-500">AI is thinking...</span>
-                      </div>
-                    </div>
-
-                    {/* AI Response */}
-                    <div className="flex justify-start animate-fade-in-up" style={{ animationDelay: '1.6s' }}>
-                      <div className="group relative max-w-xs">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-10 transition duration-300"></div>
-                        <div className="relative bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl px-4 py-3 shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all">
-                          <p className="text-gray-200 text-sm leading-relaxed">
-                            <span className="font-semibold text-white">Order #12847</span> is on its way! 📦 Arriving tomorrow by 2 PM. Track it <span className="text-orange-400 font-medium">here</span>.
-                          </p>
-                          <span className="text-xs text-gray-500 mt-2 block">1s ago</span>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                 </div>
@@ -316,20 +262,22 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-gradient-to-br from-[#050505] to-[#0a0a0a] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[500px] flex items-center justify-center">
-                {/* Animated Background Grid */}
-                <div className="absolute inset-0 opacity-20">
-                  <svg className="w-full h-full" preserveAspectRatio="none">
-                    <defs>
-                      <pattern id="workflowGrid" width="50" height="50" patternUnits="userSpaceOnUse">
-                        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#FF6B00" strokeWidth="0.5" opacity="0.1" />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#workflowGrid)" />
-                  </svg>
-                </div>
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px] flex items-center justify-center">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10 flex items-center justify-center w-full">
+                  {/* Animated Background Grid */}
+                  <div className="absolute inset-0 opacity-20">
+                    <svg className="w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id="workflowGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#FF6B00" strokeWidth="0.5" opacity="0.1" />
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#workflowGrid)" />
+                    </svg>
+                  </div>
 
-                <div className="flex flex-col relative z-10 max-w-2xl w-full space-y-8">
+                  <div className="flex flex-col relative z-10 max-w-2xl w-full space-y-8">
 
                   {/* Step 1 - Form Submission */}
                   <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0s' }}>
@@ -410,6 +358,8 @@ const CoreServices: React.FC = () => {
                         <div className="text-xs text-gray-500 mt-1">Total Time</div>
                       </div>
                     </div>
+                  </div>
+
                   </div>
 
                 </div>
