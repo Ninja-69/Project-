@@ -38,14 +38,15 @@ const conversations = [
 
 const VoiceAgentDemo: React.FC = () => {
   const [conversationIndex, setConversationIndex] = useState(0);
-  const [stage, setStage] = useState<'question' | 'thinking' | 'answer' | 'clear'>('question');
+  const [stage, setStage] = useState<'question' | 'thinking' | 'answer' | 'display' | 'clear'>('question');
 
   useEffect(() => {
     const timings = {
-      question: 1800,
-      thinking: 1200,
-      answer: 1800,
-      clear: 600
+      question: 1600,
+      thinking: 1000,
+      answer: 1600,
+      display: 1200,
+      clear: 800
     };
 
     const timer = setTimeout(() => {
@@ -54,6 +55,8 @@ const VoiceAgentDemo: React.FC = () => {
       } else if (stage === 'thinking') {
         setStage('answer');
       } else if (stage === 'answer') {
+        setStage('display');
+      } else if (stage === 'display') {
         setStage('clear');
       } else {
         setConversationIndex((conversationIndex + 1) % conversations.length);
@@ -70,8 +73,8 @@ const VoiceAgentDemo: React.FC = () => {
 
   const getMessageOpacity = (messageStage: 'question' | 'answer') => {
     if (stage === 'clear') return 'opacity-0';
-    if (messageStage === 'question' && (stage === 'question' || stage === 'thinking')) return 'opacity-100';
-    if (messageStage === 'answer' && (stage === 'answer' || stage === 'thinking')) return 'opacity-100';
+    if (messageStage === 'question' && (stage === 'question' || stage === 'thinking' || stage === 'answer' || stage === 'display')) return 'opacity-100';
+    if (messageStage === 'answer' && (stage === 'answer' || stage === 'display')) return 'opacity-100';
     return 'opacity-0';
   };
 
@@ -94,9 +97,8 @@ const VoiceAgentDemo: React.FC = () => {
         {/* Main Container */}
         <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
           {/* Waveform Visualization - Different patterns per conversation */}
-          <div className={`flex items-center justify-center gap-0.5 h-16 mb-6 transition-all duration-500 ${
-            stage === 'thinking' ? 'opacity-100' : 'opacity-20'
-          }`}>
+          <div className={`flex items-center justify-center gap-0.5 h-16 mb-6 transition-all duration-500 ${stage === 'thinking' ? 'opacity-100' : 'opacity-20'
+            }`}>
             {[...Array(24)].map((_, i) => {
               let height = 15;
               let animationName = 'waveformBars';
@@ -130,7 +132,7 @@ const VoiceAgentDemo: React.FC = () => {
                   delay = i * 0.05;
                   break;
               }
-              
+
               return (
                 <div
                   key={`bar-${i}`}
@@ -180,9 +182,8 @@ const VoiceAgentDemo: React.FC = () => {
                 {[0, 1, 2, 3].map((idx) => (
                   <div
                     key={idx}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      idx === conversationIndex % 5 ? 'bg-orange-500 w-4' : 'bg-white/20 w-1.5'
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-300 ${idx === conversationIndex % 5 ? 'bg-orange-500 w-4' : 'bg-white/20 w-1.5'
+                      }`}
                   ></div>
                 ))}
               </div>
