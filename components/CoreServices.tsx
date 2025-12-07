@@ -268,28 +268,28 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1e] to-[#050510] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-purple-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
                 {/* Animated background gradient */}
                 <div className="absolute inset-0 opacity-30">
-                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+                  <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 </div>
 
                 <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8">
 
                   {/* Speech Recognition Badge */}
                   <div className="mb-4 animate-fade-in-down">
-                    <div className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.4)] border border-purple-400/30 inline-block">
+                    <div className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 shadow-[0_0_30px_rgba(255,107,0,0.4)] border border-orange-400/30 inline-block">
                       <span className="text-white font-semibold text-sm tracking-wide">Speech Recognition</span>
                     </div>
                   </div>
 
                   {/* Main Card Container */}
                   <div className="w-full max-w-md mx-auto">
-                    <div className="relative bg-gradient-to-br from-[#2a2a3e]/40 to-[#1a1a2e]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-purple-500/20 transition-all duration-300">
+                    <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-orange-500/20 transition-all duration-300">
 
                       {/* Inner glow effect */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                       <div className="relative z-10 flex items-center justify-between gap-6">
 
@@ -297,17 +297,17 @@ const CoreServices: React.FC = () => {
                         <div className="flex-shrink-0">
                           <div className="relative">
                             {/* Outer pulsing rings */}
-                            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-lg animate-pulse-glow" style={{ width: '100px', height: '100px', left: '-20px', top: '-20px' }}></div>
-                            <div className="absolute inset-0 rounded-full border border-purple-500/30 animate-pulse" style={{ width: '90px', height: '90px', left: '-15px', top: '-15px', animationDelay: '0.3s' }}></div>
-                            <div className="absolute inset-0 rounded-full border border-purple-500/20 animate-pulse" style={{ width: '80px', height: '80px', left: '-10px', top: '-10px', animationDelay: '0.6s' }}></div>
+                            <div className="absolute inset-0 rounded-full bg-orange-500/20 blur-lg animate-pulse-glow" style={{ width: '100px', height: '100px', left: '-20px', top: '-20px' }}></div>
+                            <div className="absolute inset-0 rounded-full border border-orange-500/30 animate-pulse" style={{ width: '90px', height: '90px', left: '-15px', top: '-15px', animationDelay: '0.3s' }}></div>
+                            <div className="absolute inset-0 rounded-full border border-orange-500/20 animate-pulse" style={{ width: '80px', height: '80px', left: '-10px', top: '-10px', animationDelay: '0.6s' }}></div>
 
                             {/* Main button */}
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.5)] border border-purple-400/50 relative cursor-pointer hover:scale-110 transition-transform duration-300 group/mic">
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-600 to-orange-700 flex items-center justify-center shadow-[0_0_30px_rgba(255,107,0,0.5)] border border-orange-400/50 relative cursor-pointer hover:scale-110 transition-transform duration-300 group/mic">
                               {/* Inner glow */}
-                              <div className="absolute inset-1 rounded-full bg-gradient-to-br from-purple-400/30 to-transparent"></div>
+                              <div className="absolute inset-1 rounded-full bg-gradient-to-br from-orange-400/30 to-transparent"></div>
 
-                              {/* White center dot */}
-                              <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] relative z-10 animate-pulse"></div>
+                              {/* Mic Icon */}
+                              <Mic size={24} className="text-white drop-shadow-lg relative z-10" />
                             </div>
                           </div>
                         </div>
@@ -322,7 +322,7 @@ const CoreServices: React.FC = () => {
                             return (
                               <div
                                 key={`bar-${i}`}
-                                className="w-1 bg-gradient-to-t from-purple-600 via-purple-500 to-purple-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.6)]"
+                                className="w-1 bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 rounded-full shadow-[0_0_10px_rgba(255,107,0,0.6)]"
                                 style={{
                                   height: `${randomHeight}%`,
                                   animation: `waveformBars 1.2s ease-in-out infinite`,
