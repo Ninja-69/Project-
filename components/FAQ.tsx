@@ -6,11 +6,31 @@ import Reveal from './ui/Reveal';
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const questions = [
-    "What Makes Kynnex Different From Other Agencies?",
-    "How Does AI Enhance The Services Provided By Kynnex?",
-    "How Does Kynnex Ensure The Quality Of Its AI Solutions?",
-    "Does Kynnex Offer Customized Solutions?"
+  const faqs = [
+    {
+      question: "Why Do Most AI Automation Projects Fail?",
+      answer: "Most agencies treat AI like a checkbox—they implement it and disappear. We've seen it a thousand times: expensive tools gathering dust, workflows that don't integrate, teams left confused. The difference? We don't just build systems. We build systems that your team actually uses. We obsess over adoption, training, and continuous optimization. Your success isn't our end goal—it's our only metric."
+    },
+    {
+      question: "How Much Can We Actually Save With AI Automation?",
+      answer: "The real question isn't how much you'll save—it's how much you're currently wasting. Our clients typically see 40-60% reduction in manual work within 90 days. But here's what matters: that's not just cost savings. That's your team freed up to do strategic work. That's faster decision-making. That's competitive advantage. We've seen companies go from 50 employees to 15 doing the same work—better. The ROI usually pays for itself in 3-4 months."
+    },
+    {
+      question: "What If Our Workflows Are Too Complex For AI?",
+      answer: "That's exactly what we specialize in. Simple workflows don't need us—they need a template. Complex workflows? That's where AI shines. We've automated everything from multi-step approval processes to real-time customer support across 12 channels. The more complex your operation, the more value we unlock. We start by mapping your actual workflows (not the ones in your documentation), then build AI systems that handle the edge cases, exceptions, and nuances that make your business unique."
+    },
+    {
+      question: "How Long Until We See Results?",
+      answer: "Quick wins in 2-3 weeks. Meaningful transformation in 60-90 days. Full optimization in 6 months. We don't believe in the 'big bang' approach. We implement in phases, measure everything, and iterate. You'll see your first automation live within 30 days. You'll see ROI within 90. And you'll see your team's productivity fundamentally shift within 6 months. We're transparent about timelines because we're confident in our process."
+    },
+    {
+      question: "What Happens If The AI Makes Mistakes?",
+      answer: "It will. And that's by design. We build guardrails, not guardrails that prevent mistakes—guardrails that catch them before they matter. Every AI system we deploy has human oversight built in. Critical decisions get flagged for review. Patterns that deviate from normal get alerts. We use AI to handle 95% of routine work perfectly, and humans handle the 5% that needs judgment. It's not AI replacing humans—it's AI amplifying them."
+    },
+    {
+      question: "Can You Really Integrate With Our Existing Systems?",
+      answer: "Yes. We've integrated with everything from legacy mainframes to cutting-edge SaaS platforms. Your tech stack doesn't matter—we speak the language of APIs, webhooks, databases, and custom integrations. We've built connectors for systems you didn't even know could be connected. The question isn't whether we can integrate—it's whether your current systems are worth integrating. Sometimes the real win is replacing outdated tools entirely."
+    }
   ];
 
   return (
@@ -31,25 +51,25 @@ const FAQ: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          {questions.map((q, i) => (
-            <Reveal key={i} effect="fade-up" delay={0.2 + (i * 0.1)} width="100%">
-              <div className="border-b border-white/10 pb-4">
+          {faqs.map((faq, i) => (
+            <Reveal key={i} effect={(['fade-up', 'slide-up', 'blur-in', 'zoom-in', 'bounce-in', 'flip-in'] as const)[i % 6]} delay={0.2 + (i * 0.1)} width="100%">
+              <div className="border-b border-white/10 pb-4 group hover:border-orange-500/30 transition-colors">
                 <button 
-                  className="w-full flex items-center justify-between py-4 text-left group"
+                  className="w-full flex items-center justify-between py-4 text-left"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 >
-                  <span className="text-lg md:text-xl font-medium text-gray-300 group-hover:text-white transition-colors pr-8">
-                    {q}
+                  <span className="text-lg md:text-xl font-semibold text-gray-300 group-hover:text-white transition-colors pr-8 text-left">
+                    {faq.question}
                   </span>
                   <ChevronDown 
-                    className={`text-gray-500 transition-transform duration-300 flex-shrink-0 ${openIndex === i ? 'rotate-180 text-white' : ''}`} 
+                    className={`text-gray-500 transition-transform duration-300 flex-shrink-0 ${openIndex === i ? 'rotate-180 text-orange-400' : 'group-hover:text-gray-300'}`} 
                   />
                 </button>
                 <div 
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === i ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                  <p className="pb-6 text-gray-400 leading-relaxed">
-                    We combine cutting-edge AI technology with deep industry expertise to deliver tailored automation solutions that drive real business results. Our focus is on long-term partnership and continuous optimization.
+                  <p className="pb-6 text-gray-400 leading-relaxed text-base">
+                    {faq.answer}
                   </p>
                 </div>
               </div>
