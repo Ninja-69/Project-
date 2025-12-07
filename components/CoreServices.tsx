@@ -208,12 +208,12 @@ const CoreServices: React.FC = () => {
                       <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
                     </svg>
 
-                    {/* Floating Stat Cards - Glassmorphism */}
-                    <div className="absolute top-8 right-8 bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.3)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] hover:border-orange-500/50 transition-all duration-300 group">
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    {/* Floating Stat Cards - Neomorphism + Glassmorphism */}
+                    <div className="absolute top-8 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(255,107,0,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(255,107,0,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-orange-500/60 transition-all duration-300 group">
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div className="relative z-10">
                         <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(255,165,0,0.8)]"></div>
+                          <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_12px_rgba(255,165,0,0.9)]"></div>
                           <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
                         </div>
                         <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
@@ -223,11 +223,11 @@ const CoreServices: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="absolute bottom-12 right-8 bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.3)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.5)] hover:border-blue-500/50 transition-all duration-300 group" style={{ animationDelay: '1s' }}>
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(96,165,250,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(96,165,250,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-blue-500/60 transition-all duration-300 group" style={{ animationDelay: '1s' }}>
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div className="relative z-10">
                         <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></div>
+                          <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_12px_rgba(96,165,250,0.9)]"></div>
                           <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
                         </div>
                         <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
