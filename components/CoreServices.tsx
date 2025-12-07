@@ -93,22 +93,51 @@ const VoiceAgentDemo: React.FC = () => {
 
         {/* Main Container */}
         <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
-          {/* Waveform Visualization */}
+          {/* Waveform Visualization - Different patterns per conversation */}
           <div className={`flex items-center justify-center gap-0.5 h-16 mb-6 transition-all duration-500 ${
             stage === 'thinking' ? 'opacity-100' : 'opacity-20'
           }`}>
             {[...Array(24)].map((_, i) => {
-              const baseHeight = 15;
-              const randomHeight = Math.sin(i * 0.5) * 40 + baseHeight;
-              const delay = i * 0.05;
+              let height = 15;
+              let animationName = 'waveformBars';
+              let delay = i * 0.05;
+
+              // Different wave patterns for each conversation
+              switch (conversationIndex % 5) {
+                case 0: // Appointment - Smooth wave
+                  height = Math.sin(i * 0.4) * 35 + 20;
+                  animationName = 'waveSmooth';
+                  delay = i * 0.06;
+                  break;
+                case 1: // Order tracking - Sharp peaks
+                  height = Math.abs(Math.sin(i * 0.6)) * 45 + 15;
+                  animationName = 'waveSharp';
+                  delay = i * 0.04;
+                  break;
+                case 2: // Reminder - Gentle pulse
+                  height = Math.sin(i * 0.3 + Math.PI / 2) * 30 + 25;
+                  animationName = 'waveGentle';
+                  delay = i * 0.07;
+                  break;
+                case 3: // Promotion - Energetic bounce
+                  height = Math.abs(Math.cos(i * 0.7)) * 50 + 10;
+                  animationName = 'waveBounce';
+                  delay = i * 0.03;
+                  break;
+                case 4: // Technical - Irregular pattern
+                  height = (Math.sin(i * 0.5) * Math.cos(i * 0.3)) * 40 + 20;
+                  animationName = 'waveIrregular';
+                  delay = i * 0.05;
+                  break;
+              }
               
               return (
                 <div
                   key={`bar-${i}`}
                   className="w-0.5 bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 rounded-full shadow-[0_0_8px_rgba(255,107,0,0.5)]"
                   style={{
-                    height: `${randomHeight}%`,
-                    animation: stage === 'thinking' ? `waveformBars 1.2s ease-in-out infinite` : 'none',
+                    height: `${height}%`,
+                    animation: stage === 'thinking' ? `${animationName} 1.2s ease-in-out infinite` : 'none',
                     animationDelay: `${delay}s`
                   }}
                 ></div>

@@ -1548,7 +1548,101 @@
         border-radius: 40px;
     }
 
-    /* Speech Recognition Waveform Animation */
+    /* Speech Recognition Waveform Animations - 5 Different Patterns */
+    
+    /* 1. Smooth Wave - Appointment booking */
+    @keyframes waveSmooth {
+        0%, 100% {
+            transform: scaleY(0.8);
+            opacity: 0.6;
+        }
+        50% {
+            transform: scaleY(1.2);
+            opacity: 0.95;
+        }
+    }
+
+    /* 2. Sharp Peaks - Order tracking */
+    @keyframes waveSharp {
+        0%, 100% {
+            height: 20%;
+            opacity: 0.5;
+        }
+        25% {
+            height: 90%;
+            opacity: 1;
+        }
+        50% {
+            height: 15%;
+            opacity: 0.4;
+        }
+        75% {
+            height: 85%;
+            opacity: 0.95;
+        }
+    }
+
+    /* 3. Gentle Pulse - Reminder setup */
+    @keyframes waveGentle {
+        0%, 100% {
+            transform: scaleY(0.9);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scaleY(1.1);
+            opacity: 0.85;
+        }
+    }
+
+    /* 4. Energetic Bounce - Promotion inquiry */
+    @keyframes waveBounce {
+        0%, 100% {
+            transform: scaleY(0.7);
+            opacity: 0.5;
+        }
+        25% {
+            transform: scaleY(1.3);
+            opacity: 1;
+        }
+        50% {
+            transform: scaleY(0.8);
+            opacity: 0.6;
+        }
+        75% {
+            transform: scaleY(1.2);
+            opacity: 0.95;
+        }
+    }
+
+    /* 5. Irregular Pattern - Technical support */
+    @keyframes waveIrregular {
+        0%, 100% {
+            height: 25%;
+            opacity: 0.6;
+        }
+        15% {
+            height: 75%;
+            opacity: 0.9;
+        }
+        30% {
+            height: 35%;
+            opacity: 0.5;
+        }
+        45% {
+            height: 85%;
+            opacity: 0.95;
+        }
+        60% {
+            height: 40%;
+            opacity: 0.55;
+        }
+        75% {
+            height: 70%;
+            opacity: 0.88;
+        }
+    }
+
+    /* Original waveform bars fallback */
     @keyframes waveformBars {
         0%, 100% {
             height: 30%;
