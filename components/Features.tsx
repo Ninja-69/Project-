@@ -1,6 +1,6 @@
 import React from 'react';
 import Badge from './ui/Badge';
-import { TrendingUp, CheckCircle2, Zap } from 'lucide-react';
+import { TrendingUp, CheckCircle2, Zap, Bot, Mic } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 const Features: React.FC = () => {
@@ -71,6 +71,88 @@ const Features: React.FC = () => {
             </div>
           </div>
         </Reveal>
+
+        {/* Chatbot Development */}
+        <div className="mt-32 space-y-32">
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Chatbot Development</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We develop advanced AI-driven chatbots that handle repetitive tasks, manage data, and streamline your internal workflows to drive real results for your business.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                <div className="relative z-10">
+                  {/* Chat Animation */}
+                  <div className="max-w-2xl mx-auto w-full space-y-6">
+                    {/* User Message */}
+                    <div className="flex items-start gap-4 justify-end animate-fade-in-up" style={{ animationDelay: '0s' }}>
+                      <div className="bg-gradient-to-br from-orange-500/30 to-orange-600/20 border border-orange-500/50 rounded-2xl px-4 py-3 max-w-xs shadow-lg">
+                        <p className="text-gray-100 text-sm font-medium">Please create a graph of the profits in this file</p>
+                      </div>
+                    </div>
+
+                    {/* AI Response */}
+                    <div className="flex items-start gap-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.3)]">
+                        <Bot size={20} className="text-white" />
+                      </div>
+                      <div className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 max-w-xs">
+                        <p className="text-gray-200 text-sm leading-relaxed">
+                          <span className="font-semibold text-white">Done!</span> I've generated your profit graph. Revenue is up 48% this quarter.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Voice Assistants */}
+          <div className="group">
+            <Reveal effect="fade-up">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Voice Assistants</h3>
+              <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
+                We develop voice assistants that use advanced natural language processing (NLP) to handle inbound and outbound calls for support, scheduling, reminders, and promotions.
+              </p>
+            </Reveal>
+
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
+                <div className="relative z-10 flex flex-col items-center justify-center w-full gap-12">
+
+                  {/* Waveform Visualization */}
+                  <div className="flex items-center justify-center gap-1 h-24">
+                    {[...Array(20)].map((_, i) => (
+                      <div key={`wave-${i}`} className="w-2 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${30 + Math.sin(i * 0.5) * 40}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
+                    ))}
+                  </div>
+
+                  {/* Central Mic with Glow */}
+                  <div className="relative">
+                    <div className="absolute inset-0 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div className="relative w-40 h-40 rounded-full bg-gradient-to-br from-orange-600 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(255,107,0,0.5)] border-2 border-orange-400/50 group-hover:shadow-[0_0_80px_rgba(255,107,0,0.7)] transition-all duration-300">
+                      <div className="absolute inset-3 rounded-full border-2 border-orange-300/30 animate-spin" style={{ animationDuration: '3s' }}></div>
+                      <Mic size={64} className="text-white relative z-10 animate-pulse" />
+                    </div>
+                  </div>
+
+                  {/* Status Text with Animation */}
+                  <div className="text-center">
+                    <div className="px-6 py-2 rounded-full bg-orange-500/20 border border-orange-500/40 inline-block mb-4">
+                      <span className="text-orange-300 text-sm font-semibold animate-pulse">🎙️ Listening...</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">Real-time voice processing with AI intelligence</p>
+                  </div>
+
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </div>
     </section>
   );
