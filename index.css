@@ -1548,97 +1548,153 @@
         border-radius: 40px;
     }
 
-    /* Speech Recognition Waveform Animations - 5 Different Patterns */
+    /* Speech Recognition Waveform Animations - 5 Different Flowing Patterns */
     
-    /* 1. Smooth Wave - Appointment booking */
-    @keyframes waveSmooth {
-        0%, 100% {
-            transform: scaleY(0.8);
-            opacity: 0.6;
-        }
-        50% {
-            transform: scaleY(1.2);
-            opacity: 0.95;
-        }
-    }
-
-    /* 2. Sharp Peaks - Order tracking */
-    @keyframes waveSharp {
-        0%, 100% {
+    /* 1. Smooth Wave Flow - Appointment booking */
+    @keyframes waveFlowSmooth {
+        0% {
             height: 20%;
-            opacity: 0.5;
-        }
-        25% {
-            height: 90%;
-            opacity: 1;
-        }
-        50% {
-            height: 15%;
-            opacity: 0.4;
-        }
-        75% {
-            height: 85%;
-            opacity: 0.95;
-        }
-    }
-
-    /* 3. Gentle Pulse - Reminder setup */
-    @keyframes waveGentle {
-        0%, 100% {
-            transform: scaleY(0.9);
-            opacity: 0.7;
-        }
-        50% {
-            transform: scaleY(1.1);
-            opacity: 0.85;
-        }
-    }
-
-    /* 4. Energetic Bounce - Promotion inquiry */
-    @keyframes waveBounce {
-        0%, 100% {
-            transform: scaleY(0.7);
-            opacity: 0.5;
-        }
-        25% {
-            transform: scaleY(1.3);
-            opacity: 1;
-        }
-        50% {
-            transform: scaleY(0.8);
             opacity: 0.6;
         }
-        75% {
-            transform: scaleY(1.2);
-            opacity: 0.95;
+        25% {
+            height: 60%;
+            opacity: 0.8;
         }
-    }
-
-    /* 5. Irregular Pattern - Technical support */
-    @keyframes waveIrregular {
-        0%, 100% {
-            height: 25%;
-            opacity: 0.6;
-        }
-        15% {
-            height: 75%;
-            opacity: 0.9;
-        }
-        30% {
-            height: 35%;
-            opacity: 0.5;
-        }
-        45% {
-            height: 85%;
-            opacity: 0.95;
-        }
-        60% {
+        50% {
             height: 40%;
-            opacity: 0.55;
+            opacity: 0.9;
         }
         75% {
             height: 70%;
+            opacity: 0.85;
+        }
+        100% {
+            height: 20%;
+            opacity: 0.6;
+        }
+    }
+
+    /* 2. Sharp Peaks Flow - Order tracking */
+    @keyframes waveFlowSharp {
+        0% {
+            height: 15%;
+            opacity: 0.5;
+        }
+        20% {
+            height: 85%;
+            opacity: 1;
+        }
+        40% {
+            height: 25%;
+            opacity: 0.4;
+        }
+        60% {
+            height: 80%;
+            opacity: 0.95;
+        }
+        80% {
+            height: 30%;
+            opacity: 0.45;
+        }
+        100% {
+            height: 15%;
+            opacity: 0.5;
+        }
+    }
+
+    /* 3. Gentle Pulse Flow - Reminder setup */
+    @keyframes waveFlowGentle {
+        0% {
+            height: 30%;
+            opacity: 0.7;
+        }
+        25% {
+            height: 50%;
+            opacity: 0.8;
+        }
+        50% {
+            height: 35%;
+            opacity: 0.75;
+        }
+        75% {
+            height: 55%;
+            opacity: 0.85;
+        }
+        100% {
+            height: 30%;
+            opacity: 0.7;
+        }
+    }
+
+    /* 4. Energetic Bounce Flow - Promotion inquiry */
+    @keyframes waveFlowBounce {
+        0% {
+            height: 20%;
+            opacity: 0.5;
+        }
+        15% {
+            height: 75%;
+            opacity: 0.95;
+        }
+        30% {
+            height: 25%;
+            opacity: 0.55;
+        }
+        45% {
+            height: 80%;
+            opacity: 1;
+        }
+        60% {
+            height: 30%;
+            opacity: 0.6;
+        }
+        75% {
+            height: 70%;
+            opacity: 0.9;
+        }
+        100% {
+            height: 20%;
+            opacity: 0.5;
+        }
+    }
+
+    /* 5. Irregular Pattern Flow - Technical support */
+    @keyframes waveFlowIrregular {
+        0% {
+            height: 25%;
+            opacity: 0.6;
+        }
+        12% {
+            height: 70%;
+            opacity: 0.9;
+        }
+        25% {
+            height: 35%;
+            opacity: 0.5;
+        }
+        37% {
+            height: 80%;
+            opacity: 0.95;
+        }
+        50% {
+            height: 40%;
+            opacity: 0.55;
+        }
+        62% {
+            height: 75%;
             opacity: 0.88;
+        }
+        75% {
+            height: 30%;
+            opacity: 0.52;
+        }
+        87% {
+            height: 65%;
+            opacity: 0.85;
+        }
+        100% {
+            height: 25%;
+            opacity: 0.6;
         }
     }
 
@@ -1659,6 +1715,17 @@
         75% {
             height: 85%;
             opacity: 0.95;
+        }
+    }
+
+    /* Slide up animation for chart bars */
+    @keyframes slideUp {
+        0% {
+            height: 0%;
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
         }
     }
 
