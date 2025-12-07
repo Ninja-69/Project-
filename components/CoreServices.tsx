@@ -340,9 +340,8 @@ const ChatbotDemo: React.FC = () => {
                 {[0, 1, 2, 3].map((idx) => (
                   <div
                     key={idx}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      idx === conversationIndex % 4 ? 'bg-orange-500 w-4' : 'bg-white/20 w-1.5'
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-300 ${idx === conversationIndex % 4 ? 'bg-orange-500 w-4' : 'bg-white/20 w-1.5'
+                      }`}
                   ></div>
                 ))}
               </div>
@@ -419,48 +418,65 @@ const VoiceAgentDemo: React.FC = () => {
 
         {/* Main Container */}
         <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
-          {/* Waveform Visualization - Different patterns per conversation */}
-          <div className={`flex items-center justify-center gap-0.5 h-16 mb-6 transition-all duration-500 ${stage === 'thinking' ? 'opacity-100' : 'opacity-20'
+          {/* Waveform Visualization - Organic SVG waves */}
+          <div className={`flex items-center justify-center h-16 mb-6 transition-all duration-500 ${stage === 'thinking' ? 'opacity-100' : 'opacity-60'
             }`}>
-            {[...Array(24)].map((_, i) => {
-              let animationName = 'waveSmooth';
-              let duration = '2s';
+            <svg width="100%" height="100%" viewBox="0 0 400 80" preserveAspectRatio="xMidYMid meet" className="w-full">
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#ea580c" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#ff6b00" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#ff8c00" stopOpacity="0.3" />
+                </linearGradient>
+                <filter id="waveGlow">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
 
-              // Different wave animations for each conversation
-              switch (conversationIndex % voiceConversations.length) {
-                case 0: // Appointment - Smooth wave
-                  animationName = 'waveFlowSmooth';
-                  duration = '2.4s';
-                  break;
-                case 1: // Order tracking - Sharp peaks
-                  animationName = 'waveFlowSharp';
-                  duration = '1.8s';
-                  break;
-                case 2: // Reminder - Gentle pulse
-                  animationName = 'waveFlowGentle';
-                  duration = '2.8s';
-                  break;
-                case 3: // Promotion - Energetic bounce
-                  animationName = 'waveFlowBounce';
-                  duration = '1.6s';
-                  break;
-                case 4: // Technical - Irregular pattern
-                  animationName = 'waveFlowIrregular';
-                  duration = '2.2s';
-                  break;
-              }
-
-              return (
-                <div
-                  key={`bar-${i}`}
-                  className="w-0.5 bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 rounded-full shadow-[0_0_8px_rgba(255,107,0,0.5)]"
-                  style={{
-                    animation: stage === 'thinking' ? `${animationName} ${duration} ease-in-out infinite` : 'none',
-                    animationDelay: `${i * 0.08}s`
-                  }}
-                ></div>
-              );
-            })}
+              {/* Animated wave paths */}
+              <path
+                d="M0,40 Q25,20 50,40 T100,40 T150,40 T200,40 T250,40 T300,40 T350,40 T400,40"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                filter="url(#waveGlow)"
+                style={{
+                  animation: `organicWave 3s ease-in-out infinite`,
+                  opacity: stage === 'thinking' ? 1 : 0.7
+                }}
+              />
+              <path
+                d="M0,45 Q30,25 60,45 T120,45 T180,45 T240,45 T300,45 T360,45 T400,45"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                filter="url(#waveGlow)"
+                style={{
+                  animation: `organicWave 3.5s ease-in-out infinite`,
+                  animationDelay: '0.3s',
+                  opacity: stage === 'thinking' ? 0.8 : 0.5
+                }}
+              />
+              <path
+                d="M0,50 Q20,30 40,50 T80,50 T120,50 T160,50 T200,50 T240,50 T280,50 T320,50 T360,50 T400,50"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                filter="url(#waveGlow)"
+                style={{
+                  animation: `organicWave 4s ease-in-out infinite`,
+                  animationDelay: '0.6s',
+                  opacity: stage === 'thinking' ? 0.7 : 0.4
+                }}
+              />
+            </svg>
           </div>
 
           {/* Conversation Box */}

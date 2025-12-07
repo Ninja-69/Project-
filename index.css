@@ -1729,6 +1729,22 @@
         }
     }
 
+    /* Organic wave animation */
+    @keyframes organicWave {
+        0%, 100% {
+            transform: translateX(0px);
+        }
+        25% {
+            transform: translateX(2px);
+        }
+        50% {
+            transform: translateX(-2px);
+        }
+        75% {
+            transform: translateX(1px);
+        }
+    }
+
     /* Pulse Glow for Mic Button */
     @keyframes pulseGlowMic {
         0%, 100% {
