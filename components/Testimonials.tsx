@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Badge from './ui/Badge';
-import { ArrowLeft, ArrowRight, Box, Circle, Cloud, Hexagon, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 const Testimonials: React.FC = () => {
@@ -22,30 +22,50 @@ const Testimonials: React.FC = () => {
   const reviews = [
     {
       id: 1,
-      logoIcon: <Box className="w-6 h-6 text-amber-600" strokeWidth={2.5} />,
+      logoIcon: (
+        <svg className="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#8B4513" strokeWidth="2"/>
+          <path d="M50 20C35 20 25 30 25 45C25 55 30 65 50 75C70 65 75 55 75 45C75 30 65 20 50 20Z" fill="#D2691E" opacity="0.8"/>
+          <circle cx="50" cy="45" r="8" fill="#8B4513"/>
+        </svg>
+      ),
       company: "The Local Roaster Café",
       text: "I was dragging my feet on a new website because the last one was a confusing nightmare. The agency team made it painless. Now, our online ordering system actually works smoothly, and the site loads fast even on an old phone. Since the launch, our online pre-orders are up 60%. Honestly, it just makes me look more professional, and I'm not embarrassed to send customers there anymore.",
       author: "David Chen",
       role: "Owner - The Local Roaster Café",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
     },
     {
       id: 2,
-      logoIcon: <Circle className="w-6 h-6 text-blue-400" strokeWidth={2.5} />,
+      logoIcon: (
+        <svg className="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#0EA5E9" strokeWidth="2"/>
+          <path d="M50 25C45 25 42 28 42 35L42 65C42 72 45 75 50 75C55 75 58 72 58 65L58 35C58 28 55 25 50 25Z" fill="#0EA5E9" opacity="0.7"/>
+          <circle cx="45" cy="35" r="3" fill="#0EA5E9"/>
+          <circle cx="55" cy="35" r="3" fill="#0EA5E9"/>
+          <path d="M48 55L52 55M48 62L52 62" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      ),
       company: "Elite Dental Care",
       text: "Before this Voice Agent, my receptionists were constantly swamped just answering basic calls—'What are your hours?' 'Do you take my insurance?' Now, the AI handles all those repetitive questions perfectly. It sounds incredibly clear, and our patients love getting instant answers. My front office team can actually focus on patient care and scheduling, which has completely changed the stress level in the office.",
       author: "Jessica Morales",
       role: "Practice Manager - Elite Dental Care",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
     },
     {
       id: 3,
-      logoIcon: <Hexagon className="w-6 h-6 text-orange-500" strokeWidth={2.5} />,
+      logoIcon: (
+        <svg className="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#FF6B35" strokeWidth="2"/>
+          <path d="M50 25L65 35L65 55C65 70 50 80 50 80C50 80 35 70 35 55L35 35L50 25Z" fill="#FF6B35" opacity="0.7"/>
+          <text x="50" y="60" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#FF6B35" fontFamily="Arial">IW</text>
+        </svg>
+      ),
       company: "InnoWear Apparel",
       text: "We had this ridiculous, manual process for categorizing thousands of customer feedback tickets. It was a massive time sink. The agency came in and built an AI model that does it instantly, with scary accuracy. It saves our analysts at least 20 hours per week and gives us real-time insights we didn't have before. The project was delivered on time, under budget, and the impact was immediate. No fluff, just results.",
       author: "Omar Khan",
       role: "Head of Product Development - InnoWear Apparel",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
     }
   ];
 

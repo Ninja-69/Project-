@@ -99,28 +99,29 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-6 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px]">
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-4 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden">
                 <div className="relative z-10">
                   {/* Premium Graph Container */}
-                  <div className="relative h-[350px] w-full mt-8">
-                    {/* Animated Grid Background */}
-                    <div className="absolute inset-0 opacity-30">
-                      <svg className="w-full h-full" preserveAspectRatio="none">
-                        <defs>
-                          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="url(#gridGradient)" strokeWidth="0.5" />
-                          </pattern>
-                          <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1" />
-                            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
-                          </linearGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#grid)" />
-                      </svg>
-                    </div>
+                  <div className="relative w-full mt-4 md:mt-8">
+                    <div className="h-[300px] md:h-[450px] w-full">
+                      {/* Animated Grid Background */}
+                      <div className="absolute inset-0 opacity-30">
+                        <svg className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+                          <defs>
+                            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="url(#gridGradient)" strokeWidth="0.5" />
+                            </pattern>
+                            <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1" />
+                              <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
+                            </linearGradient>
+                          </defs>
+                          <rect width="100%" height="100%" fill="url(#grid)" />
+                        </svg>
+                      </div>
 
-                    {/* Main Chart SVG */}
-                    <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 350">
+                      {/* Main Chart SVG */}
+                      <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 350">
                       <defs>
                         {/* Efficiency Gradient - Premium Orange */}
                         <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -208,44 +209,70 @@ const CoreServices: React.FC = () => {
                       <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
                     </svg>
 
-                    {/* Floating Stat Cards - Neomorphism + Glassmorphism */}
-                    <div className="absolute top-8 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(255,107,0,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(255,107,0,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-orange-500/60 transition-all duration-300 group">
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_12px_rgba(255,165,0,0.9)]"></div>
-                          <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                      {/* Floating Stat Cards - Neomorphism + Glassmorphism */}
+                      <div className="hidden md:block absolute top-8 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(255,107,0,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(255,107,0,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-orange-500/60 transition-all duration-300 group">
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3">
+                            <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_12px_rgba(255,165,0,0.9)]"></div>
+                            <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                          </div>
+                          <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                            +48%
+                            <span className="text-lg text-emerald-400 font-bold">↑</span>
+                          </div>
                         </div>
-                        <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                      </div>
+
+                      <div className="hidden md:block absolute bottom-12 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(96,165,250,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(96,165,250,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-blue-500/60 transition-all duration-300 group" style={{ animationDelay: '1s' }}>
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3">
+                            <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_12px_rgba(96,165,250,0.9)]"></div>
+                            <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
+                          </div>
+                          <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                            -11%
+                            <span className="text-lg text-emerald-400 font-bold">↓</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Legend */}
+                      <div className="absolute bottom-2 md:bottom-0 left-2 md:left-0 flex gap-4 md:gap-8 text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-0.5 bg-orange-500 rounded-full"></div>
+                          <span className="text-gray-400">Efficiency</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-0.5 bg-blue-500 rounded-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #3B82F6 0px, #3B82F6 4px, transparent 4px, transparent 8px)' }}></div>
+                          <span className="text-gray-400">Cost</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mobile Stat Cards - Below Graph */}
+                    <div className="md:hidden grid grid-cols-2 gap-4 mt-8">
+                      <div className="bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-2xl p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_30px_rgba(255,107,0,0.3)]">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></div>
+                          <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency</span>
+                        </div>
+                        <div className="text-3xl font-bold text-white flex items-center gap-1">
                           +48%
-                          <span className="text-lg text-emerald-400 font-bold">↑</span>
+                          <span className="text-sm text-emerald-400">↑</span>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(96,165,250,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(96,165,250,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-blue-500/60 transition-all duration-300 group" style={{ animationDelay: '1s' }}>
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_12px_rgba(96,165,250,0.9)]"></div>
-                          <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
+                      <div className="bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-2xl p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_30px_rgba(96,165,250,0.3)]">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+                          <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost</span>
                         </div>
-                        <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                        <div className="text-3xl font-bold text-white flex items-center gap-1">
                           -11%
-                          <span className="text-lg text-emerald-400 font-bold">↓</span>
+                          <span className="text-sm text-emerald-400">↓</span>
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Legend */}
-                    <div className="absolute bottom-0 left-0 flex gap-8 text-xs">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-0.5 bg-orange-500 rounded-full"></div>
-                        <span className="text-gray-400">Efficiency</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-0.5 bg-blue-500 rounded-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #3B82F6 0px, #3B82F6 4px, transparent 4px, transparent 8px)' }}></div>
-                        <span className="text-gray-400">Cost</span>
                       </div>
                     </div>
                   </div>
