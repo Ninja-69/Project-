@@ -121,32 +121,37 @@ const Features: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
-                <div className="relative z-10">
-                  {/* Voice Conversation */}
-                  <div className="max-w-2xl mx-auto w-full space-y-6">
-                    {/* User Message */}
-                    <div className="flex items-start gap-4 justify-end animate-fade-in-up" style={{ animationDelay: '0s' }}>
-                      <div className="bg-gradient-to-br from-orange-500/30 to-orange-600/20 border border-orange-500/50 rounded-2xl px-4 py-3 max-w-xs shadow-lg">
-                        <p className="text-gray-100 text-sm font-medium">Can you help me schedule a call for tomorrow at 2 PM?</p>
-                      </div>
-                    </div>
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
+                <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8">
 
-                    {/* AI Response with Waveform */}
-                    <div className="flex items-start gap-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.3)]">
-                        <Mic size={20} className="text-white" />
-                      </div>
-                      <div className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 w-full max-w-md">
-                        {/* Waveform Visualization */}
-                        <div className="flex items-center justify-center gap-0.5 h-12">
-                          {[...Array(16)].map((_, i) => (
-                            <div key={`wave-${i}`} className="w-1 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${20 + Math.sin(i * 0.5) * 30}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
-                          ))}
-                        </div>
-                      </div>
+                  {/* Waveform Left */}
+                  <div className="flex items-center justify-center gap-0.5 h-20">
+                    {[...Array(12)].map((_, i) => (
+                      <div key={`wave-left-${i}`} className="w-1.5 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${25 + Math.sin((12 - i) * 0.4) * 35}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
+                    ))}
+                  </div>
+
+                  {/* Central Mic with Glow */}
+                  <div className="relative">
+                    <div className="absolute inset-0 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-orange-600 to-orange-500 flex items-center justify-center shadow-[0_0_50px_rgba(255,107,0,0.6)] border-2 border-orange-400/60 group-hover:shadow-[0_0_70px_rgba(255,107,0,0.8)] transition-all duration-300">
+                      <div className="absolute inset-2 rounded-full border-2 border-orange-300/40 animate-spin" style={{ animationDuration: '3s' }}></div>
+                      <Mic size={56} className="text-white relative z-10 animate-pulse" />
                     </div>
                   </div>
+
+                  {/* Waveform Right */}
+                  <div className="flex items-center justify-center gap-0.5 h-20">
+                    {[...Array(12)].map((_, i) => (
+                      <div key={`wave-right-${i}`} className="w-1.5 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${25 + Math.sin(i * 0.4) * 35}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
+                    ))}
+                  </div>
+
+                  {/* Label */}
+                  <div className="text-center mt-4">
+                    <p className="text-orange-400 text-sm font-semibold">Voice Assistant</p>
+                  </div>
+
                 </div>
               </div>
             </Reveal>
