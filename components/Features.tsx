@@ -10,11 +10,16 @@ const Features: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <Reveal effect="fade-up">
+            <Badge className="mb-6 text-orange-400 border-orange-500/20 bg-orange-500/10">
+              <TrendingUp size={14} className="mr-2" /> Benefits
+            </Badge>
+          </Reveal>
+          <Reveal effect="fade-up" delay={0.1}>
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Experience The Benefits<br />Of Our Expertise
             </h2>
           </Reveal>
-          <Reveal effect="fade-up" delay={0.1}>
+          <Reveal effect="fade-up" delay={0.2}>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Discover the key benefits of partnering with us.
             </p>

@@ -208,26 +208,32 @@ const CoreServices: React.FC = () => {
                       <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
                     </svg>
 
-                    {/* Floating Stat Cards */}
-                    <div className="absolute top-8 right-8 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-orange-500/50 rounded-2xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.4)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.6)] transition-all duration-300">
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(255,165,0,0.8)]"></div>
-                        <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
-                      </div>
-                      <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
-                        +48%
-                        <span className="text-lg text-emerald-400 font-bold">↑</span>
+                    {/* Floating Stat Cards - Glassmorphism */}
+                    <div className="absolute top-8 right-8 bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.3)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] hover:border-orange-500/50 transition-all duration-300 group">
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(255,165,0,0.8)]"></div>
+                          <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                        </div>
+                        <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                          +48%
+                          <span className="text-lg text-emerald-400 font-bold">↑</span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-blue-500/50 rounded-2xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.4)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.6)] transition-all duration-300" style={{ animationDelay: '1s' }}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></div>
-                        <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
-                      </div>
-                      <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
-                        -11%
-                        <span className="text-lg text-emerald-400 font-bold">↓</span>
+                    <div className="absolute bottom-12 right-8 bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.3)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.5)] hover:border-blue-500/50 transition-all duration-300 group" style={{ animationDelay: '1s' }}>
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></div>
+                          <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
+                        </div>
+                        <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
+                          -11%
+                          <span className="text-lg text-emerald-400 font-bold">↓</span>
+                        </div>
                       </div>
                     </div>
 
