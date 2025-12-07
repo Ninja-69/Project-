@@ -42,7 +42,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
             <Section title="1. Introduction" icon={<FileText className="w-6 h-6" />}>
                 <p>
-                    Welcome to Automatix ("we," "our," or "us"). We are committed to protecting your privacy and ensuring the security of your data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our <Highlight>AI automation services</Highlight>.
+                    Welcome to Kynnex ("we," "our," or "us"). We are committed to protecting your privacy and ensuring the security of your data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our <Highlight>AI automation services</Highlight>.
                 </p>
             </Section>
 
@@ -94,7 +94,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
             <div className="border-t border-white/10 pt-8 mt-12">
                 <p className="text-gray-500 text-sm text-center">
-                    If you have any questions about this Privacy Policy, please contact us at <a href="mailto:hello@automatix.com" className="text-orange-400 hover:text-white transition-colors">hello@automatix.com</a>.
+                    If you have any questions about this Privacy Policy, please contact us at <a href="mailto:hello@kynnex.com" className="text-orange-400 hover:text-white transition-colors">hello@kynnex.com</a>.
                 </p>
             </div>
         </LegalLayout>

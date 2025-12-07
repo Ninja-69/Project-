@@ -42,13 +42,13 @@ const TermsOfService: React.FC<TermsOfServiceProps> = ({ onBack }) => {
 
             <Section title="1. Acceptance of Terms" icon={<FileCheck className="w-6 h-6" />}>
                 <p>
-                    By accessing or using the services provided by Automatix ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                    By accessing or using the services provided by Kynnex ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
                 </p>
             </Section>
 
             <Section title="2. Description of Services" icon={<Zap className="w-6 h-6" />}>
                 <p>
-                    Automatix provides <Highlight>AI automation consulting</Highlight>, development, and maintenance services. This includes building custom workflows, integrating AI agents, and optimizing business processes using third-party tools and APIs.
+                    Kynnex provides <Highlight>AI automation consulting</Highlight>, development, and maintenance services. This includes building custom workflows, integrating AI agents, and optimizing business processes using third-party tools and APIs.
                 </p>
             </Section>
 
@@ -88,7 +88,7 @@ const TermsOfService: React.FC<TermsOfServiceProps> = ({ onBack }) => {
 
             <div className="border-t border-white/10 pt-8 mt-12">
                 <p className="text-gray-500 text-sm text-center">
-                    Questions about our terms? Contact us at <a href="mailto:hello@automatix.com" className="text-orange-400 hover:text-white transition-colors">hello@automatix.com</a>.
+                    Questions about our terms? Contact us at <a href="mailto:hello@kynnex.com" className="text-orange-400 hover:text-white transition-colors">hello@kynnex.com</a>.
                 </p>
             </div>
         </LegalLayout>

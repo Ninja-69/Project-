@@ -24,7 +24,7 @@ const Testimonials: React.FC = () => {
       id: 1,
       logoIcon: <Box className="w-6 h-6 text-white" strokeWidth={2.5} />,
       company: "Logoipsum",
-      text: "Our AI-driven voice assistant developed by Auralis now handles all incoming customer support queries instantly, 24/7.",
+      text: "Our AI-driven voice assistant developed by Kynnex now handles all incoming customer support queries instantly, 24/7.",
       author: "James Harrington",
       role: "CEO - Logoipsum",
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"
@@ -33,7 +33,7 @@ const Testimonials: React.FC = () => {
       id: 2,
       logoIcon: <Circle className="w-6 h-6 text-white" strokeWidth={2.5} />,
       company: "Logoipsum",
-      text: "Auralis automated a large part of our workflows, resulting in a significant increase in productivity and a huge decrease in cost.",
+      text: "Kynnex automated a large part of our workflows, resulting in a significant increase in productivity and a huge decrease in cost.",
       author: "Emma Castillo",
       role: "Founder - Logoipsum",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
@@ -42,7 +42,7 @@ const Testimonials: React.FC = () => {
       id: 3,
       logoIcon: <Cloud className="w-6 h-6 text-white" strokeWidth={2.5} />,
       company: "Logoipsum",
-      text: "Auralis' AI consulting streamlined our operations and reduced costs by 30%. Would highly recommend their consulting services!",
+      text: "Kynnex' AI consulting streamlined our operations and reduced costs by 30%. Would highly recommend their consulting services!",
       author: "Liam Bennett",
       role: "CTO - Logoipsum",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop"

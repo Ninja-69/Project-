@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
   }, []);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('hello@automatix.com');
+    navigator.clipboard.writeText('hello@kynnex.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -109,7 +109,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
           {/* Brand Column */}
           <div className="md:col-span-5 flex flex-col justify-between h-full">
             <div>
-              <h3 className="text-3xl font-bold text-white mb-6">Automatix.</h3>
+              <h3 className="text-3xl font-bold text-white mb-6">Kynnex.</h3>
               <p className="text-gray-400 max-w-sm text-lg leading-relaxed mb-8">
                 We build digital products, brands, and experiences that connect with the people who matter most.
               </p>
@@ -122,7 +122,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
                   className="group flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-95"
                 >
                   <Mail className="w-5 h-5 text-gray-300" />
-                  <span className="text-gray-300 group-hover:text-white">hello@automatix.com</span>
+                  <span className="text-gray-300 group-hover:text-white">hello@kynnex.com</span>
                   {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-gray-500 group-hover:text-white opacity-0 group-hover:opacity-100 transition-all" />}
                 </button>
               </div>
@@ -165,7 +165,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-gray-600 text-sm">
-            © {new Date().getFullYear()} Automatix Agency. All rights reserved.
+            © {new Date().getFullYear()} Kynnex Agency. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">
@@ -185,7 +185,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateLegal }) => {
       {/* Big Text Background Overlay */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02]">
         <h1 className="text-[20vw] font-bold text-white whitespace-nowrap leading-none select-none">
-          AUTOMATIX
+          KYNNEX
         </h1>
       </div>
     </footer>

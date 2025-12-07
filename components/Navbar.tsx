@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLogoClick }) => {
           aria-label="Go to home"
         >
           <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-300">
-            Automatix
+            Kynnex
           </span>
           <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1"></div>
         </button>

@@ -24,7 +24,7 @@ const About: React.FC = () => {
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight md:leading-tight max-w-4xl mx-auto">
             {/* Staggered Blur-In Text Effect */}
             <Reveal effect="blur-in" delay={0.3} width="100%" threshold={0.3}>
-              <span className="bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">Hi, we're Auralis</span>{' '}
+              <span className="bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">Hi, we're Kynnex</span>{' '}
               <span className="inline-flex items-center justify-center align-middle mx-1 w-10 h-10 md:w-14 md:h-14 rounded-xl bg-surface-light border border-white/10 relative top-[-4px] animate-pulse-slow shadow-[0_0_15px_rgba(255,107,0,0.2)]">
                 <Sparkles className="w-5 h-5 md:w-7 md:h-7 text-orange-500 fill-orange-500" />
               </span>{' '}

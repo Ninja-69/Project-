@@ -127,7 +127,7 @@ const Integrations: React.FC = () => {
             </Reveal>
 
             <Reveal effect="blur-in" delay={0.2}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">Why Automatix Stands Out</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">Why Kynnex Stands Out</h2>
             </Reveal>
             
             <Reveal effect="fade-up" delay={0.3}>
@@ -136,7 +136,7 @@ const Integrations: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
                 
-                {/* Card: Automatix */}
+                {/* Card: Kynnex */}
                 <Reveal effect="slide-right" delay={0.2} className="h-full" width="100%">
                   <div className="bg-[#05050A] border border-orange-500/20 rounded-3xl p-8 md:p-10 relative overflow-hidden group h-full">
                       <div className="absolute inset-0 bg-orange-900/5 pointer-events-none group-hover:bg-orange-900/10 transition-colors duration-500"></div>
@@ -146,7 +146,7 @@ const Integrations: React.FC = () => {
                           <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
                               <Zap className="text-white fill-white" size={18} />
                           </div>
-                          <span className="text-2xl font-bold text-white">Automatix</span>
+                          <span className="text-2xl font-bold text-white">Kynnex</span>
                       </div>
 
                       <div className="flex flex-col gap-6">

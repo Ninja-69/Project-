@@ -7,10 +7,10 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const questions = [
-    "What Makes Automatix Different From Other Agencies?",
-    "How Does AI Enhance The Services Provided By Automatix?",
-    "How Does Automatix Ensure The Quality Of Its AI Solutions?",
-    "Does Automatix Offer Customized Solutions?"
+    "What Makes Kynnex Different From Other Agencies?",
+    "How Does AI Enhance The Services Provided By Kynnex?",
+    "How Does Kynnex Ensure The Quality Of Its AI Solutions?",
+    "Does Kynnex Offer Customized Solutions?"
   ];
 
   return (

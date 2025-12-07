@@ -42,7 +42,7 @@ const CookiePolicy: React.FC<CookiePolicyProps> = ({ onBack }) => {
 
             <Section title="2. How We Use Cookies" icon={<Settings className="w-6 h-6" />}>
                 <p className="mb-6">
-                    Automatix uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. We use the following types of cookies:
+                    Kynnex uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. We use the following types of cookies:
                 </p>
 
                 <div className="grid gap-4">
@@ -83,7 +83,7 @@ const CookiePolicy: React.FC<CookiePolicyProps> = ({ onBack }) => {
 
             <div className="border-t border-white/10 pt-6 sm:pt-8 mt-8 sm:mt-12">
                 <p className="text-gray-500 text-xs sm:text-sm text-center">
-                    Questions about cookies? Contact us at <a href="mailto:hello@automatix.com" className="text-orange-400 hover:text-white transition-colors">hello@automatix.com</a>.
+                    Questions about cookies? Contact us at <a href="mailto:hello@kynnex.com" className="text-orange-400 hover:text-white transition-colors">hello@kynnex.com</a>.
                 </p>
             </div>
         </LegalLayout>
