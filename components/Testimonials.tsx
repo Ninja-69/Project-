@@ -30,7 +30,7 @@ const Testimonials: React.FC = () => {
         </svg>
       ),
       company: "The Local Roaster Café",
-      text: "I was dragging my feet on a new website because the last one was a confusing nightmare. The agency team made it painless. Now, our online ordering system actually works smoothly, and the site loads fast even on an old phone. Since the launch, our online pre-orders are up 60%. Honestly, it just makes me look more professional, and I'm not embarrassed to send customers there anymore.",
+      text: "The website transformation was painless. Our online ordering system works smoothly, loads fast, and since launch, pre-orders are up 60%. It looks professional and I'm proud to share it.",
       author: "David Chen",
       role: "Owner - The Local Roaster Café",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
@@ -47,7 +47,7 @@ const Testimonials: React.FC = () => {
         </svg>
       ),
       company: "Elite Dental Care",
-      text: "Before this Voice Agent, my receptionists were constantly swamped just answering basic calls—'What are your hours?' 'Do you take my insurance?' Now, the AI handles all those repetitive questions perfectly. It sounds incredibly clear, and our patients love getting instant answers. My front office team can actually focus on patient care and scheduling, which has completely changed the stress level in the office.",
+      text: "The Voice Agent handles all repetitive calls perfectly. Patients love instant answers, and our team can focus on actual patient care. The stress level in our office has completely changed.",
       author: "Jessica Morales",
       role: "Practice Manager - Elite Dental Care",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
@@ -62,10 +62,25 @@ const Testimonials: React.FC = () => {
         </svg>
       ),
       company: "InnoWear Apparel",
-      text: "We had this ridiculous, manual process for categorizing thousands of customer feedback tickets. It was a massive time sink. The agency came in and built an AI model that does it instantly, with scary accuracy. It saves our analysts at least 20 hours per week and gives us real-time insights we didn't have before. The project was delivered on time, under budget, and the impact was immediate. No fluff, just results.",
+      text: "The AI model categorizes feedback instantly with scary accuracy. It saves our analysts 20 hours weekly and delivers real-time insights. Delivered on time, under budget, with immediate impact.",
       author: "Omar Khan",
       role: "Head of Product Development - InnoWear Apparel",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      id: 4,
+      logoIcon: (
+        <svg className="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#10B981" strokeWidth="2"/>
+          <path d="M50 30L60 40L60 65C60 72 55 78 50 78C45 78 40 72 40 65L40 40L50 30Z" fill="#10B981" opacity="0.7"/>
+          <circle cx="50" cy="50" r="4" fill="#10B981"/>
+        </svg>
+      ),
+      company: "GreenTech Solutions",
+      text: "Implementation was seamless and the ROI was immediate. Our operations are 40% more efficient, and the team adoption rate exceeded expectations. Highly recommend their approach.",
+      author: "Sarah Mitchell",
+      role: "Operations Director - GreenTech Solutions",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"
     }
   ];
 
