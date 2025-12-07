@@ -56,6 +56,7 @@ const VoiceAgentDemo: React.FC = () => {
 
   const currentConversation = conversations[conversationIndex];
   const currentMessage = currentConversation[messageIndex];
+  const isAISpeaking = currentMessage?.type === 'ai';
 
   return (
     <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
@@ -73,19 +74,46 @@ const VoiceAgentDemo: React.FC = () => {
           </div>
         </div>
 
-        {/* Conversation Box */}
-        <div className="w-full max-w-2xl mx-auto flex-1 flex flex-col justify-center">
-          <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] min-h-[280px] flex flex-col justify-center">
+        {/* Main Container */}
+        <div className="w-full max-w-2xl mx-auto flex-1 flex flex-col justify-center gap-8">
+          {/* Waveform Visualization */}
+          <div className="flex items-center justify-center gap-1 h-24">
+            {[...Array(32)].map((_, i) => {
+              const baseHeight = 20;
+              const randomHeight = Math.sin(i * 0.4) * 50 + baseHeight;
+              const delay = i * 0.04;
+              
+              return (
+                <div
+                  key={`bar-${i}`}
+                  className={`w-1 rounded-full transition-all ${
+                    isAISpeaking
+                      ? 'bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 shadow-[0_0_10px_rgba(255,107,0,0.6)]'
+                      : 'bg-gradient-to-t from-orange-500/40 via-orange-400/30 to-orange-300/20'
+                  }`}
+                  style={{
+                    height: `${randomHeight}%`,
+                    animation: isAISpeaking ? `waveformBars 1.2s ease-in-out infinite` : 'none',
+                    animationDelay: `${delay}s`,
+                    opacity: isAISpeaking ? 0.8 : 0.4
+                  }}
+                ></div>
+              );
+            })}
+          </div>
+
+          {/* Conversation Box */}
+          <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
             {/* Inner glow effect */}
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
             <div className="relative z-10 space-y-6">
               {/* Message Display */}
-              <div className="space-y-4 min-h-[120px]">
+              <div className="min-h-[100px] flex items-center justify-center">
                 {currentMessage && (
                   <div
                     key={`${conversationIndex}-${messageIndex}`}
-                    className={`animate-fade-in-up flex gap-4 ${
+                    className={`animate-fade-in-up flex gap-4 w-full ${
                       currentMessage.type === 'human' ? 'justify-end' : 'justify-start'
                     }`}
                   >
@@ -124,9 +152,7 @@ const VoiceAgentDemo: React.FC = () => {
                   <div
                     key={idx}
                     className={`h-1 rounded-full transition-all duration-300 ${
-                      idx <= messageIndex
-                        ? 'bg-orange-500 w-6'
-                        : 'bg-white/20 w-2'
+                      idx <= messageIndex ? 'bg-orange-500 w-6' : 'bg-white/20 w-2'
                     }`}
                   ></div>
                 ))}
