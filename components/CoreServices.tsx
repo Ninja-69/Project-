@@ -209,7 +209,7 @@ const CoreServices: React.FC = () => {
                     </svg>
 
                     {/* Floating Stat Cards */}
-                    <div className="absolute top-8 right-8 bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/40 rounded-2xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.3)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] transition-all duration-300 backdrop-blur-sm">
+                    <div className="absolute top-8 right-8 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-orange-500/50 rounded-2xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.4)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.6)] transition-all duration-300">
                       <div className="flex items-center gap-3">
                         <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(255,165,0,0.8)]"></div>
                         <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
@@ -220,7 +220,7 @@ const CoreServices: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/40 rounded-2xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.3)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.5)] transition-all duration-300 backdrop-blur-sm" style={{ animationDelay: '1s' }}>
+                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-blue-500/50 rounded-2xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.4)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.6)] transition-all duration-300" style={{ animationDelay: '1s' }}>
                       <div className="flex items-center gap-3">
                         <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></div>
                         <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
