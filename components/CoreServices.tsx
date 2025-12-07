@@ -1,7 +1,148 @@
-import React from 'react';
-import { Bot, FileText, Mic, Zap, Database, Layout, Layers, TrendingUp, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Bot, FileText, Mic, Zap, Database, Layout, Layers, TrendingUp, CheckCircle2, User } from 'lucide-react';
 import Reveal from './ui/Reveal';
 import Badge from './ui/Badge';
+
+const conversations = [
+  [
+    { type: 'human', text: 'I need to schedule an appointment' },
+    { type: 'ai', text: 'Sure! What date and time work best for you?' },
+    { type: 'human', text: 'Tomorrow at 2 PM' },
+    { type: 'ai', text: 'Perfect! Your appointment is confirmed for tomorrow at 2 PM.' }
+  ],
+  [
+    { type: 'human', text: 'How can I track my order?' },
+    { type: 'ai', text: 'I can help you with that. What\'s your order number?' },
+    { type: 'human', text: 'It\'s ORD-12345' },
+    { type: 'ai', text: 'Your order is on the way and will arrive in 2-3 days.' }
+  ],
+  [
+    { type: 'human', text: 'Set a reminder for my meeting' },
+    { type: 'ai', text: 'When would you like to be reminded?' },
+    { type: 'human', text: 'One hour before the meeting' },
+    { type: 'ai', text: 'Reminder set! You\'ll get notified one hour before.' }
+  ],
+  [
+    { type: 'human', text: 'What\'s your current promotion?' },
+    { type: 'ai', text: 'We have 30% off on all services this week!' },
+    { type: 'human', text: 'That sounds great, how do I apply it?' },
+    { type: 'ai', text: 'Use code SAVE30 at checkout. Offer ends Sunday!' }
+  ],
+  [
+    { type: 'human', text: 'I have a technical issue' },
+    { type: 'ai', text: 'I\'m here to help. What\'s the problem?' },
+    { type: 'human', text: 'The app keeps crashing' },
+    { type: 'ai', text: 'Try updating to the latest version. Let me know if it helps!' }
+  ]
+];
+
+const VoiceAgentDemo: React.FC = () => {
+  const [conversationIndex, setConversationIndex] = useState(0);
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const currentConversation = conversations[conversationIndex];
+      if (messageIndex < currentConversation.length - 1) {
+        setMessageIndex(messageIndex + 1);
+      } else {
+        setConversationIndex((conversationIndex + 1) % conversations.length);
+        setMessageIndex(0);
+      }
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [conversationIndex, messageIndex]);
+
+  const currentConversation = conversations[conversationIndex];
+  const currentMessage = currentConversation[messageIndex];
+
+  return (
+    <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8 h-full">
+        {/* Badge */}
+        <div className="mb-4 animate-fade-in-down">
+          <div className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 shadow-[0_0_30px_rgba(255,107,0,0.4)] border border-orange-400/30 inline-block">
+            <span className="text-white font-semibold text-sm tracking-wide">Voice Agents</span>
+          </div>
+        </div>
+
+        {/* Conversation Box */}
+        <div className="w-full max-w-2xl mx-auto flex-1 flex flex-col justify-center">
+          <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] min-h-[280px] flex flex-col justify-center">
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div className="relative z-10 space-y-6">
+              {/* Message Display */}
+              <div className="space-y-4 min-h-[120px]">
+                {currentMessage && (
+                  <div
+                    key={`${conversationIndex}-${messageIndex}`}
+                    className={`animate-fade-in-up flex gap-4 ${
+                      currentMessage.type === 'human' ? 'justify-end' : 'justify-start'
+                    }`}
+                  >
+                    {/* Icon */}
+                    <div
+                      className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
+                        currentMessage.type === 'human'
+                          ? 'bg-orange-500/20 border border-orange-500/30'
+                          : 'bg-orange-600/30 border border-orange-500/40'
+                      }`}
+                    >
+                      {currentMessage.type === 'human' ? (
+                        <User size={20} className="text-orange-400" />
+                      ) : (
+                        <Bot size={20} className="text-orange-300" />
+                      )}
+                    </div>
+
+                    {/* Message Bubble */}
+                    <div
+                      className={`max-w-xs px-4 py-3 rounded-2xl ${
+                        currentMessage.type === 'human'
+                          ? 'bg-orange-500/20 border border-orange-500/30 text-gray-100'
+                          : 'bg-white/5 border border-white/10 text-gray-200'
+                      }`}
+                    >
+                      <p className="text-sm leading-relaxed">{currentMessage.text}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Progress Indicator */}
+              <div className="flex gap-1 justify-center pt-4">
+                {conversations[conversationIndex].map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      idx <= messageIndex
+                        ? 'bg-orange-500 w-6'
+                        : 'bg-white/20 w-2'
+                    }`}
+                  ></div>
+                ))}
+              </div>
+
+              {/* Conversation Counter */}
+              <div className="text-center text-xs text-gray-500 font-medium">
+                Conversation {conversationIndex + 1} of {conversations.length}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const CoreServices: React.FC = () => {
   return (
@@ -258,88 +399,17 @@ const CoreServices: React.FC = () => {
             </Reveal>
           </div>
 
-          {/* 3. Voice Assistants */}
+          {/* 3. Voice Agents */}
           <div className="group">
             <Reveal effect="fade-up">
-              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Voice Assistants</h3>
+              <h3 className="text-3xl md:text-4xl font-semibold mb-6">Voice Agents</h3>
               <p className="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
-                We develop voice assistants that use advanced natural language processing (NLP) to handle inbound and outbound calls for support, scheduling, reminders, and promotions.
+                We develop intelligent voice agents that use advanced natural language processing (NLP) to handle inbound and outbound calls for support, scheduling, reminders, and promotions.
               </p>
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 opacity-30">
-                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                </div>
-
-                <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8">
-
-                  {/* Speech Recognition Badge */}
-                  <div className="mb-4 animate-fade-in-down">
-                    <div className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 shadow-[0_0_30px_rgba(255,107,0,0.4)] border border-orange-400/30 inline-block">
-                      <span className="text-white font-semibold text-sm tracking-wide">Speech Recognition</span>
-                    </div>
-                  </div>
-
-                  {/* Main Card Container */}
-                  <div className="w-full max-w-md mx-auto">
-                    <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-orange-500/20 transition-all duration-300">
-
-                      {/* Inner glow effect */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                      <div className="relative z-10 flex items-center justify-between gap-6">
-
-                        {/* Left: Mic Button */}
-                        <div className="flex-shrink-0">
-                          <div className="relative">
-                            {/* Outer pulsing rings */}
-                            <div className="absolute inset-0 rounded-full bg-orange-500/20 blur-lg animate-pulse-glow" style={{ width: '100px', height: '100px', left: '-20px', top: '-20px' }}></div>
-                            <div className="absolute inset-0 rounded-full border border-orange-500/30 animate-pulse" style={{ width: '90px', height: '90px', left: '-15px', top: '-15px', animationDelay: '0.3s' }}></div>
-                            <div className="absolute inset-0 rounded-full border border-orange-500/20 animate-pulse" style={{ width: '80px', height: '80px', left: '-10px', top: '-10px', animationDelay: '0.6s' }}></div>
-
-                            {/* Main button */}
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-600 to-orange-700 flex items-center justify-center shadow-[0_0_30px_rgba(255,107,0,0.5)] border border-orange-400/50 relative cursor-pointer hover:scale-110 transition-transform duration-300 group/mic">
-                              {/* Inner glow */}
-                              <div className="absolute inset-1 rounded-full bg-gradient-to-br from-orange-400/30 to-transparent"></div>
-
-                              {/* Mic Icon */}
-                              <Mic size={24} className="text-white drop-shadow-lg relative z-10" />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Right: Waveform Bars */}
-                        <div className="flex-1 flex items-center justify-end gap-1.5 h-20">
-                          {[...Array(24)].map((_, i) => {
-                            const baseHeight = 30;
-                            const randomHeight = Math.sin(i * 0.5) * 40 + baseHeight;
-                            const delay = i * 0.05;
-
-                            return (
-                              <div
-                                key={`bar-${i}`}
-                                className="w-1 bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 rounded-full shadow-[0_0_10px_rgba(255,107,0,0.6)]"
-                                style={{
-                                  height: `${randomHeight}%`,
-                                  animation: `waveformBars 1.2s ease-in-out infinite`,
-                                  animationDelay: `${delay}s`,
-                                  opacity: 0.7 + (Math.sin(i * 0.3) * 0.3)
-                                }}
-                              ></div>
-                            );
-                          })}
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+              <VoiceAgentDemo />
             </Reveal>
           </div>
 
