@@ -34,8 +34,7 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
                 <div className="relative z-10">
                   {/* Chat Animation */}
                   <div className="max-w-2xl mx-auto w-full space-y-6">
@@ -73,137 +72,136 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-6 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px]">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-6 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px]">
                 <div className="relative z-10">
                   {/* Premium Graph Container */}
                   <div className="relative h-[350px] w-full mt-8">
-                  {/* Animated Grid Background */}
-                  <div className="absolute inset-0 opacity-30">
-                    <svg className="w-full h-full" preserveAspectRatio="none">
+                    {/* Animated Grid Background */}
+                    <div className="absolute inset-0 opacity-30">
+                      <svg className="w-full h-full" preserveAspectRatio="none">
+                        <defs>
+                          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="url(#gridGradient)" strokeWidth="0.5" />
+                          </pattern>
+                          <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1" />
+                            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#grid)" />
+                      </svg>
+                    </div>
+
+                    {/* Main Chart SVG */}
+                    <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 350">
                       <defs>
-                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="url(#gridGradient)" strokeWidth="0.5" />
-                        </pattern>
-                        <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1" />
+                        {/* Efficiency Gradient */}
+                        <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.4" />
                           <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
                         </linearGradient>
+                        {/* Cost Gradient */}
+                        <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
+                          <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                        </linearGradient>
+                        {/* Glow Filter */}
+                        <filter id="glow">
+                          <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                          <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
                       </defs>
-                      <rect width="100%" height="100%" fill="url(#grid)" />
+
+                      {/* Efficiency Area Fill */}
+                      <path
+                        d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60 L900,350 L0,350 Z"
+                        fill="url(#efficiencyGradient)"
+                        className="animate-fade-in"
+                        style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
+                      />
+
+                      {/* Cost Area Fill */}
+                      <path
+                        d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300 L900,350 L0,350 Z"
+                        fill="url(#costGradient)"
+                        className="animate-fade-in"
+                        style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
+                      />
+
+                      {/* Efficiency Line - Smooth Curve */}
+                      <path
+                        d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
+                        fill="none"
+                        stroke="#FF6B00"
+                        strokeWidth="4"
+                        filter="url(#glow)"
+                        className="animate-draw drop-shadow-[0_0_15px_rgba(255,107,0,0.6)]"
+                      />
+
+                      {/* Cost Line - Smooth Curve */}
+                      <path
+                        d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
+                        fill="none"
+                        stroke="#3B82F6"
+                        strokeWidth="3"
+                        strokeDasharray="8 4"
+                        className="animate-draw opacity-70"
+                      />
+
+                      {/* Data Points on Efficiency Line */}
+                      {[0, 225, 450, 675, 900].map((x, i) => {
+                        const y = 280 - (i * 44);
+                        return (
+                          <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
+                            <circle cx={x} cy={y} r="5" fill="#000" stroke="#FF6B00" strokeWidth="2" />
+                            <circle cx={x} cy={y} r="10" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.3" />
+                          </g>
+                        );
+                      })}
+
+                      {/* Axis Lines */}
+                      <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
+                      <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
                     </svg>
-                  </div>
 
-                  {/* Main Chart SVG */}
-                  <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 350">
-                    <defs>
-                      {/* Efficiency Gradient */}
-                      <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.4" />
-                        <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
-                      </linearGradient>
-                      {/* Cost Gradient */}
-                      <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
-                      </linearGradient>
-                      {/* Glow Filter */}
-                      <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                        <feMerge>
-                          <feMergeNode in="coloredBlur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-
-                    {/* Efficiency Area Fill */}
-                    <path
-                      d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60 L900,350 L0,350 Z"
-                      fill="url(#efficiencyGradient)"
-                      className="animate-fade-in"
-                      style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
-                    />
-
-                    {/* Cost Area Fill */}
-                    <path
-                      d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300 L900,350 L0,350 Z"
-                      fill="url(#costGradient)"
-                      className="animate-fade-in"
-                      style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
-                    />
-
-                    {/* Efficiency Line - Smooth Curve */}
-                    <path
-                      d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
-                      fill="none"
-                      stroke="#FF6B00"
-                      strokeWidth="4"
-                      filter="url(#glow)"
-                      className="animate-draw drop-shadow-[0_0_15px_rgba(255,107,0,0.6)]"
-                    />
-
-                    {/* Cost Line - Smooth Curve */}
-                    <path
-                      d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
-                      fill="none"
-                      stroke="#3B82F6"
-                      strokeWidth="3"
-                      strokeDasharray="8 4"
-                      className="animate-draw opacity-70"
-                    />
-
-                    {/* Data Points on Efficiency Line */}
-                    {[0, 225, 450, 675, 900].map((x, i) => {
-                      const y = 280 - (i * 44);
-                      return (
-                        <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
-                          <circle cx={x} cy={y} r="5" fill="#000" stroke="#FF6B00" strokeWidth="2" />
-                          <circle cx={x} cy={y} r="10" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.3" />
-                        </g>
-                      );
-                    })}
-
-                    {/* Axis Lines */}
-                    <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
-                    <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
-                  </svg>
-
-                  {/* Floating Stat Cards */}
-                  <div className="absolute top-8 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-orange-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(255,107,0,0.2)] animate-float hover:shadow-[0_0_40px_rgba(255,107,0,0.3)] transition-all">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
-                      <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                    {/* Floating Stat Cards */}
+                    <div className="absolute top-8 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-orange-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(255,107,0,0.2)] animate-float hover:shadow-[0_0_40px_rgba(255,107,0,0.3)] transition-all">
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
+                        <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                      </div>
+                      <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                        +48%
+                        <span className="text-lg text-green-400">↑</span>
+                      </div>
                     </div>
-                    <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
-                      +48%
-                      <span className="text-lg text-green-400">↑</span>
+
+                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-blue-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(59,130,246,0.2)] animate-float hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all" style={{ animationDelay: '1s' }}>
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+                        <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Cost Reduction</span>
+                      </div>
+                      <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                        -11%
+                        <span className="text-lg text-green-400">↓</span>
+                      </div>
+                    </div>
+
+                    {/* Legend */}
+                    <div className="absolute bottom-0 left-0 flex gap-8 text-xs">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-0.5 bg-orange-500 rounded-full"></div>
+                        <span className="text-gray-400">Efficiency</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-0.5 bg-blue-500 rounded-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #3B82F6 0px, #3B82F6 4px, transparent 4px, transparent 8px)' }}></div>
+                        <span className="text-gray-400">Cost</span>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-blue-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(59,130,246,0.2)] animate-float hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all" style={{ animationDelay: '1s' }}>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
-                      <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Cost Reduction</span>
-                    </div>
-                    <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
-                      -11%
-                      <span className="text-lg text-green-400">↓</span>
-                    </div>
-                  </div>
-
-                  {/* Legend */}
-                  <div className="absolute bottom-0 left-0 flex gap-8 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-0.5 bg-orange-500 rounded-full"></div>
-                      <span className="text-gray-400">Efficiency</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-0.5 bg-blue-500 rounded-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #3B82F6 0px, #3B82F6 4px, transparent 4px, transparent 8px)' }}></div>
-                      <span className="text-gray-400">Cost</span>
-                    </div>
-                  </div>
-                </div>
                 </div>
               </div>
             </Reveal>
@@ -219,8 +217,7 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
                 <div className="relative z-10 flex flex-col items-center justify-center w-full gap-12">
 
                   {/* Waveform Visualization */}
@@ -262,8 +259,7 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px] flex items-center justify-center">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] relative overflow-hidden min-h-[500px] flex items-center justify-center">
                 <div className="relative z-10 flex items-center justify-center w-full">
                   {/* Animated Background Grid */}
                   <div className="absolute inset-0 opacity-20">
@@ -279,86 +275,86 @@ const CoreServices: React.FC = () => {
 
                   <div className="flex flex-col relative z-10 max-w-2xl w-full space-y-8">
 
-                  {/* Step 1 - Form Submission */}
-                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0s' }}>
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-white/20 flex items-center justify-center group-hover/step:border-orange-500/50 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.3)] transition-all duration-300 z-10 relative">
-                        <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
-                        <Layout size={28} className="text-white relative z-10 group-hover/step:scale-110 transition-transform" />
+                    {/* Step 1 - Form Submission */}
+                    <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0s' }}>
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-white/20 flex items-center justify-center group-hover/step:border-orange-500/50 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.3)] transition-all duration-300 z-10 relative">
+                          <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                          <Layout size={28} className="text-white relative z-10 group-hover/step:scale-110 transition-transform" />
+                        </div>
+                        <div className="h-16 w-1 bg-gradient-to-b from-white/20 via-orange-500/50 to-transparent my-2 relative">
+                          <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.5s' }}></div>
+                        </div>
                       </div>
-                      <div className="h-16 w-1 bg-gradient-to-b from-white/20 via-orange-500/50 to-transparent my-2 relative">
-                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.5s' }}></div>
-                      </div>
-                    </div>
-                    <div className="flex-1 py-4">
-                      <div className="group/content">
-                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">1. New Form Submission</h4>
-                        <p className="text-gray-400 text-sm">Framer form triggers workflow</p>
-                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-300 font-medium animate-pulse">
-                          Trigger Event
+                      <div className="flex-1 py-4">
+                        <div className="group/content">
+                          <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">1. New Form Submission</h4>
+                          <p className="text-gray-400 text-sm">Framer form triggers workflow</p>
+                          <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-300 font-medium animate-pulse">
+                            Trigger Event
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Step 2 - Data Processing */}
-                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-orange-500/40 flex items-center justify-center group-hover/step:border-orange-500/80 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.4)] transition-all duration-300 z-10 relative">
-                        <div className="absolute inset-0 rounded-2xl bg-orange-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
-                        <Zap size={28} className="text-orange-400 relative z-10 group-hover/step:scale-110 transition-transform animate-pulse" />
+                    {/* Step 2 - Data Processing */}
+                    <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-orange-500/40 flex items-center justify-center group-hover/step:border-orange-500/80 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.4)] transition-all duration-300 z-10 relative">
+                          <div className="absolute inset-0 rounded-2xl bg-orange-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                          <Zap size={28} className="text-orange-400 relative z-10 group-hover/step:scale-110 transition-transform animate-pulse" />
+                        </div>
+                        <div className="h-16 w-1 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent my-2 relative">
+                          <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.8s' }}></div>
+                        </div>
                       </div>
-                      <div className="h-16 w-1 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent my-2 relative">
-                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.8s' }}></div>
-                      </div>
-                    </div>
-                    <div className="flex-1 py-4">
-                      <div className="group/content">
-                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">2. Format & Clean Data</h4>
-                        <p className="text-gray-400 text-sm">Zapier processes and validates lead information</p>
-                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-xs text-orange-300 font-medium">
-                          Processing...
+                      <div className="flex-1 py-4">
+                        <div className="group/content">
+                          <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">2. Format & Clean Data</h4>
+                          <p className="text-gray-400 text-sm">Zapier processes and validates lead information</p>
+                          <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-xs text-orange-300 font-medium">
+                            Processing...
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Step 3 - Database Storage */}
-                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-blue-500/40 flex items-center justify-center group-hover/step:border-blue-500/80 group-hover/step:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 z-10 relative">
-                        <div className="absolute inset-0 rounded-2xl bg-blue-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
-                        <Database size={28} className="text-blue-400 relative z-10 group-hover/step:scale-110 transition-transform" />
+                    {/* Step 3 - Database Storage */}
+                    <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-blue-500/40 flex items-center justify-center group-hover/step:border-blue-500/80 group-hover/step:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 z-10 relative">
+                          <div className="absolute inset-0 rounded-2xl bg-blue-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                          <Database size={28} className="text-blue-400 relative z-10 group-hover/step:scale-110 transition-transform" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex-1 py-4">
-                      <div className="group/content">
-                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-blue-400 transition-colors">3. Store in Database</h4>
-                        <p className="text-gray-400 text-sm">Lead automatically saved to Airtable</p>
-                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-green-500/20 border border-green-500/40 text-xs text-green-300 font-medium animate-pulse">
-                          ✓ Complete
+                      <div className="flex-1 py-4">
+                        <div className="group/content">
+                          <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-blue-400 transition-colors">3. Store in Database</h4>
+                          <p className="text-gray-400 text-sm">Lead automatically saved to Airtable</p>
+                          <div className="mt-3 inline-block px-3 py-1 rounded-full bg-green-500/20 border border-green-500/40 text-xs text-green-300 font-medium animate-pulse">
+                            ✓ Complete
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Flow Summary */}
-                  <div className="mt-8 pt-8 border-t border-white/10 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
-                        <div className="text-2xl font-bold text-orange-400">0.5s</div>
-                        <div className="text-xs text-gray-500 mt-1">Trigger</div>
-                      </div>
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
-                        <div className="text-2xl font-bold text-orange-400">1.2s</div>
-                        <div className="text-xs text-gray-500 mt-1">Processing</div>
-                      </div>
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-green-500/30 transition-all">
-                        <div className="text-2xl font-bold text-green-400">2.0s</div>
-                        <div className="text-xs text-gray-500 mt-1">Total Time</div>
+                    {/* Flow Summary */}
+                    <div className="mt-8 pt-8 border-t border-white/10 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
+                          <div className="text-2xl font-bold text-orange-400">0.5s</div>
+                          <div className="text-xs text-gray-500 mt-1">Trigger</div>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
+                          <div className="text-2xl font-bold text-orange-400">1.2s</div>
+                          <div className="text-xs text-gray-500 mt-1">Processing</div>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-green-500/30 transition-all">
+                          <div className="text-2xl font-bold text-green-400">2.0s</div>
+                          <div className="text-xs text-gray-500 mt-1">Total Time</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
                   </div>
 
