@@ -122,92 +122,92 @@ const CoreServices: React.FC = () => {
 
                       {/* Main Chart SVG */}
                       <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 350">
-                      <defs>
-                        {/* Efficiency Gradient - Premium Orange */}
-                        <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#FF8C00" stopOpacity="0.5" />
-                          <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.3" />
-                          <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
-                        </linearGradient>
-                        {/* Cost Gradient - Premium Blue */}
-                        <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
-                          <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.25" />
-                          <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
-                        </linearGradient>
-                        {/* Strong Glow Filter */}
-                        <filter id="glow">
-                          <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                          <feMerge>
-                            <feMergeNode in="coloredBlur" />
-                            <feMergeNode in="SourceGraphic" />
-                          </feMerge>
-                        </filter>
-                        {/* Enhanced Glow for Lines */}
-                        <filter id="strongGlow">
-                          <feGaussianBlur stdDeviation="5" result="coloredBlur" />
-                          <feMerge>
-                            <feMergeNode in="coloredBlur" />
-                            <feMergeNode in="coloredBlur" />
-                            <feMergeNode in="SourceGraphic" />
-                          </feMerge>
-                        </filter>
-                      </defs>
+                        <defs>
+                          {/* Efficiency Gradient - Premium Orange */}
+                          <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#FF8C00" stopOpacity="0.5" />
+                            <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
+                          </linearGradient>
+                          {/* Cost Gradient - Premium Blue */}
+                          <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
+                            <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.25" />
+                            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                          </linearGradient>
+                          {/* Strong Glow Filter */}
+                          <filter id="glow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                            <feMerge>
+                              <feMergeNode in="coloredBlur" />
+                              <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                          </filter>
+                          {/* Enhanced Glow for Lines */}
+                          <filter id="strongGlow">
+                            <feGaussianBlur stdDeviation="5" result="coloredBlur" />
+                            <feMerge>
+                              <feMergeNode in="coloredBlur" />
+                              <feMergeNode in="coloredBlur" />
+                              <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                          </filter>
+                        </defs>
 
-                      {/* Efficiency Area Fill */}
-                      <path
-                        d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60 L900,350 L0,350 Z"
-                        fill="url(#efficiencyGradient)"
-                        className="animate-fade-in"
-                        style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
-                      />
+                        {/* Efficiency Area Fill */}
+                        <path
+                          d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60 L900,350 L0,350 Z"
+                          fill="url(#efficiencyGradient)"
+                          className="animate-fade-in"
+                          style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
+                        />
 
-                      {/* Cost Area Fill */}
-                      <path
-                        d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300 L900,350 L0,350 Z"
-                        fill="url(#costGradient)"
-                        className="animate-fade-in"
-                        style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
-                      />
+                        {/* Cost Area Fill */}
+                        <path
+                          d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300 L900,350 L0,350 Z"
+                          fill="url(#costGradient)"
+                          className="animate-fade-in"
+                          style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
+                        />
 
-                      {/* Efficiency Line - Enhanced Glow */}
-                      <path
-                        d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
-                        fill="none"
-                        stroke="#FF6B00"
-                        strokeWidth="5"
-                        filter="url(#strongGlow)"
-                        className="animate-draw"
-                        style={{ filter: 'drop-shadow(0 0 20px rgba(255,107,0,0.8))' }}
-                      />
+                        {/* Efficiency Line - Enhanced Glow */}
+                        <path
+                          d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
+                          fill="none"
+                          stroke="#FF6B00"
+                          strokeWidth="5"
+                          filter="url(#strongGlow)"
+                          className="animate-draw"
+                          style={{ filter: 'drop-shadow(0 0 20px rgba(255,107,0,0.8))' }}
+                        />
 
-                      {/* Cost Line - Enhanced Glow */}
-                      <path
-                        d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
-                        fill="none"
-                        stroke="#60A5FA"
-                        strokeWidth="4"
-                        strokeDasharray="8 4"
-                        className="animate-draw"
-                        style={{ filter: 'drop-shadow(0 0 15px rgba(96,165,250,0.6))' }}
-                      />
+                        {/* Cost Line - Enhanced Glow */}
+                        <path
+                          d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
+                          fill="none"
+                          stroke="#60A5FA"
+                          strokeWidth="4"
+                          strokeDasharray="8 4"
+                          className="animate-draw"
+                          style={{ filter: 'drop-shadow(0 0 15px rgba(96,165,250,0.6))' }}
+                        />
 
-                      {/* Data Points on Efficiency Line */}
-                      {[0, 225, 450, 675, 900].map((x, i) => {
-                        const y = 280 - (i * 44);
-                        return (
-                          <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
-                            <circle cx={x} cy={y} r="6" fill="#FF6B00" opacity="0.3" />
-                            <circle cx={x} cy={y} r="4" fill="#FF8C00" stroke="#FF6B00" strokeWidth="1.5" />
-                            <circle cx={x} cy={y} r="12" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
-                          </g>
-                        );
-                      })}
+                        {/* Data Points on Efficiency Line */}
+                        {[0, 225, 450, 675, 900].map((x, i) => {
+                          const y = 280 - (i * 44);
+                          return (
+                            <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
+                              <circle cx={x} cy={y} r="6" fill="#FF6B00" opacity="0.3" />
+                              <circle cx={x} cy={y} r="4" fill="#FF8C00" stroke="#FF6B00" strokeWidth="1.5" />
+                              <circle cx={x} cy={y} r="12" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
+                            </g>
+                          );
+                        })}
 
-                      {/* Axis Lines - Subtle */}
-                      <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
-                      <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
-                    </svg>
+                        {/* Axis Lines - Subtle */}
+                        <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
+                        <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
+                      </svg>
 
                       {/* Floating Stat Cards - Neomorphism + Glassmorphism */}
                       <div className="hidden md:block absolute top-8 right-8 bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_40px_rgba(255,107,0,0.3),8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.05)] animate-float hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3),0_0_60px_rgba(255,107,0,0.5),12px_12px_24px_rgba(0,0,0,0.4),-12px_-12px_24px_rgba(255,255,255,0.1)] hover:border-orange-500/60 transition-all duration-300 group">
