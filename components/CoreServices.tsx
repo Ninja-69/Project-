@@ -38,25 +38,42 @@ const conversations = [
 
 const VoiceAgentDemo: React.FC = () => {
   const [conversationIndex, setConversationIndex] = useState(0);
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [stage, setStage] = useState<'question' | 'thinking' | 'answer' | 'clear'>('question');
 
   useEffect(() => {
+    const timings = {
+      question: 1800,
+      thinking: 1200,
+      answer: 1800,
+      clear: 600
+    };
+
     const timer = setTimeout(() => {
-      const currentConversation = conversations[conversationIndex];
-      if (messageIndex < currentConversation.length - 1) {
-        setMessageIndex(messageIndex + 1);
+      if (stage === 'question') {
+        setStage('thinking');
+      } else if (stage === 'thinking') {
+        setStage('answer');
+      } else if (stage === 'answer') {
+        setStage('clear');
       } else {
         setConversationIndex((conversationIndex + 1) % conversations.length);
-        setMessageIndex(0);
+        setStage('question');
       }
-    }, 2500);
+    }, timings[stage]);
 
     return () => clearTimeout(timer);
-  }, [conversationIndex, messageIndex]);
+  }, [stage, conversationIndex]);
 
   const currentConversation = conversations[conversationIndex];
-  const currentMessage = currentConversation[messageIndex];
-  const isAISpeaking = currentMessage?.type === 'ai';
+  const userMessage = currentConversation[0];
+  const aiMessage = currentConversation[1];
+
+  const getMessageOpacity = (messageStage: 'question' | 'answer') => {
+    if (stage === 'clear') return 'opacity-0';
+    if (messageStage === 'question' && (stage === 'question' || stage === 'thinking')) return 'opacity-100';
+    if (messageStage === 'answer' && (stage === 'answer' || stage === 'thinking')) return 'opacity-100';
+    return 'opacity-0';
+  };
 
   return (
     <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
@@ -66,36 +83,33 @@ const VoiceAgentDemo: React.FC = () => {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8 h-full">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full gap-6">
         {/* Badge */}
-        <div className="mb-4 animate-fade-in-down">
+        <div className="animate-fade-in-down">
           <div className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 shadow-[0_0_30px_rgba(255,107,0,0.4)] border border-orange-400/30 inline-block">
             <span className="text-white font-semibold text-sm tracking-wide">Voice Agents</span>
           </div>
         </div>
 
         {/* Main Container */}
-        <div className="w-full max-w-2xl mx-auto flex-1 flex flex-col justify-center gap-8">
+        <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-center">
           {/* Waveform Visualization */}
-          <div className="flex items-center justify-center gap-1 h-24">
-            {[...Array(32)].map((_, i) => {
-              const baseHeight = 20;
-              const randomHeight = Math.sin(i * 0.4) * 50 + baseHeight;
-              const delay = i * 0.04;
+          <div className={`flex items-center justify-center gap-0.5 h-16 mb-6 transition-all duration-500 ${
+            stage === 'thinking' ? 'opacity-100' : 'opacity-20'
+          }`}>
+            {[...Array(24)].map((_, i) => {
+              const baseHeight = 15;
+              const randomHeight = Math.sin(i * 0.5) * 40 + baseHeight;
+              const delay = i * 0.05;
               
               return (
                 <div
                   key={`bar-${i}`}
-                  className={`w-1 rounded-full transition-all ${
-                    isAISpeaking
-                      ? 'bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 shadow-[0_0_10px_rgba(255,107,0,0.6)]'
-                      : 'bg-gradient-to-t from-orange-500/40 via-orange-400/30 to-orange-300/20'
-                  }`}
+                  className="w-0.5 bg-gradient-to-t from-orange-600 via-orange-500 to-orange-400 rounded-full shadow-[0_0_8px_rgba(255,107,0,0.5)]"
                   style={{
                     height: `${randomHeight}%`,
-                    animation: isAISpeaking ? `waveformBars 1.2s ease-in-out infinite` : 'none',
-                    animationDelay: `${delay}s`,
-                    opacity: isAISpeaking ? 0.8 : 0.4
+                    animation: stage === 'thinking' ? `waveformBars 1.2s ease-in-out infinite` : 'none',
+                    animationDelay: `${delay}s`
                   }}
                 ></div>
               );
@@ -103,64 +117,50 @@ const VoiceAgentDemo: React.FC = () => {
           </div>
 
           {/* Conversation Box */}
-          <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <div className="relative bg-gradient-to-br from-[#2a2a2a]/40 to-[#1a1a1a]/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
             {/* Inner glow effect */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-            <div className="relative z-10 space-y-6">
-              {/* Message Display */}
-              <div className="min-h-[100px] flex items-center justify-center">
-                {currentMessage && (
-                  <div
-                    key={`${conversationIndex}-${messageIndex}`}
-                    className={`animate-fade-in-up flex gap-4 w-full ${
-                      currentMessage.type === 'human' ? 'justify-end' : 'justify-start'
-                    }`}
-                  >
-                    {/* Icon */}
-                    <div
-                      className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
-                        currentMessage.type === 'human'
-                          ? 'bg-orange-500/20 border border-orange-500/30'
-                          : 'bg-orange-600/30 border border-orange-500/40'
-                      }`}
-                    >
-                      {currentMessage.type === 'human' ? (
-                        <User size={20} className="text-orange-400" />
-                      ) : (
-                        <Bot size={20} className="text-orange-300" />
-                      )}
-                    </div>
-
-                    {/* Message Bubble */}
-                    <div
-                      className={`max-w-xs px-4 py-3 rounded-2xl ${
-                        currentMessage.type === 'human'
-                          ? 'bg-orange-500/20 border border-orange-500/30 text-gray-100'
-                          : 'bg-white/5 border border-white/10 text-gray-200'
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed">{currentMessage.text}</p>
-                    </div>
+            <div className="relative z-10 space-y-4">
+              {/* User Question */}
+              <div className={`transition-all duration-500 ${getMessageOpacity('question')}`}>
+                <div className="flex gap-3 justify-end">
+                  <div className="max-w-xs px-4 py-2 rounded-2xl bg-orange-500/20 border border-orange-500/30 text-gray-100">
+                    <p className="text-xs leading-relaxed">{userMessage.text}</p>
                   </div>
-                )}
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center">
+                    <User size={16} className="text-orange-400" />
+                  </div>
+                </div>
               </div>
 
-              {/* Progress Indicator */}
-              <div className="flex gap-1 justify-center pt-4">
-                {conversations[conversationIndex].map((_, idx) => (
+              {/* AI Answer */}
+              <div className={`transition-all duration-500 ${getMessageOpacity('answer')}`}>
+                <div className="flex gap-3 justify-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-600/30 border border-orange-500/40 flex items-center justify-center">
+                    <Bot size={16} className="text-orange-300" />
+                  </div>
+                  <div className="max-w-xs px-4 py-2 rounded-2xl bg-white/5 border border-white/10 text-gray-200">
+                    <p className="text-xs leading-relaxed">{aiMessage.text}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Progress Dots */}
+              <div className="flex gap-1 justify-center pt-2">
+                {[0, 1, 2, 3].map((idx) => (
                   <div
                     key={idx}
                     className={`h-1 rounded-full transition-all duration-300 ${
-                      idx <= messageIndex ? 'bg-orange-500 w-6' : 'bg-white/20 w-2'
+                      idx === conversationIndex % 5 ? 'bg-orange-500 w-4' : 'bg-white/20 w-1.5'
                     }`}
                   ></div>
                 ))}
               </div>
 
-              {/* Conversation Counter */}
+              {/* Counter */}
               <div className="text-center text-xs text-gray-500 font-medium">
-                Conversation {conversationIndex + 1} of {conversations.length}
+                {conversationIndex + 1} / {conversations.length}
               </div>
             </div>
           </div>
