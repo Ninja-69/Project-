@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bot, FileText, Mic, Zap, Database, Layout, ArrowUp, ArrowDown, TrendingUp, Layers } from 'lucide-react';
+import { Bot, FileText, Mic, Zap, Database, Layout, Layers, TrendingUp, CheckCircle2 } from 'lucide-react';
 import Reveal from './ui/Reveal';
 import Badge from './ui/Badge';
 
@@ -19,6 +19,73 @@ const CoreServices: React.FC = () => {
             <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
               Our Services
             </h2>
+          </Reveal>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mb-32 py-16">
+          <Reveal effect="fade-up">
+            <div className="text-center mb-16">
+              <Badge className="mb-6 text-orange-400 border-orange-500/20 bg-orange-500/10 justify-center">
+                <TrendingUp size={14} className="mr-2" /> Benefits
+              </Badge>
+              <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Maximize efficiency and impact
+              </h3>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                Discover the key benefits of partnering with us.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {/* Benefit 1 - Cost Reduction */}
+            <Reveal effect="zoom-in" delay={0.1} width="100%">
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+                    <TrendingUp size={24} className="text-orange-400" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-white mb-4">Cost reduction</h4>
+                  <p className="text-gray-400 leading-relaxed">
+                    Optimize business processes and streamline operations to significantly minimize costs and maximize overall efficiency.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Benefit 2 - Improved Outcomes */}
+            <Reveal effect="zoom-in" delay={0.2} width="100%">
+              <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+                    <CheckCircle2 size={24} className="text-orange-400" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-white mb-4">Improved outcomes</h4>
+                  <p className="text-gray-400 leading-relaxed">
+                    Leverage powerful data-driven insights and innovative strategies to enhance business performance and achieve superior outcomes.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Benefit 3 - Increased Productivity (Full Width) */}
+          <Reveal effect="zoom-in" delay={0.3} width="100%">
+            <div className="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 rounded-3xl p-8 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+                  <Zap size={24} className="text-orange-400" />
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-4">Increased productivity</h4>
+                <p className="text-gray-400 leading-relaxed">
+                  Enhance group performance and output by automating redundant tasks, refining processes, and speeding up business functions.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </div>
 
@@ -316,40 +383,100 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex items-center justify-center">
+              <div className="bg-gradient-to-br from-[#050505] to-[#0a0a0a] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[500px] flex items-center justify-center">
+                {/* Animated Background Grid */}
+                <div className="absolute inset-0 opacity-20">
+                  <svg className="w-full h-full" preserveAspectRatio="none">
+                    <defs>
+                      <pattern id="workflowGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#FF6B00" strokeWidth="0.5" opacity="0.1"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#workflowGrid)" />
+                  </svg>
+                </div>
 
-                <div className="flex flex-col relative z-10 max-w-lg w-full">
+                <div className="flex flex-col relative z-10 max-w-2xl w-full space-y-8">
 
-                  {/* Step 1 */}
-                  <div className="flex gap-6 group/step">
+                  {/* Step 1 - Form Submission */}
+                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0s' }}>
                     <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover/step:border-white/30 transition-colors z-10">
-                        <Layout size={24} className="text-white" />
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-white/20 flex items-center justify-center group-hover/step:border-orange-500/50 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.3)] transition-all duration-300 z-10 relative">
+                        <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                        <Layout size={28} className="text-white relative z-10 group-hover/step:scale-110 transition-transform" />
                       </div>
-                      <div className="h-12 w-[1px] bg-gradient-to-b from-white/10 to-orange-500/50 my-1"></div>
+                      <div className="h-16 w-1 bg-gradient-to-b from-white/20 via-orange-500/50 to-transparent my-2 relative">
+                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.5s' }}></div>
+                      </div>
                     </div>
-                    <span className="text-lg text-gray-300 font-medium py-3">1. New Framer form submission</span>
+                    <div className="flex-1 py-4">
+                      <div className="group/content">
+                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">1. New Form Submission</h4>
+                        <p className="text-gray-400 text-sm">Framer form triggers workflow</p>
+                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-300 font-medium animate-pulse">
+                          Trigger Event
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Step 2 */}
-                  <div className="flex gap-6 group/step">
+                  {/* Step 2 - Data Processing */}
+                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                     <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-orange-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(255,107,0,0.1)] z-10">
-                        <Zap size={24} className="text-orange-500" />
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-orange-500/40 flex items-center justify-center group-hover/step:border-orange-500/80 group-hover/step:shadow-[0_0_30px_rgba(255,107,0,0.4)] transition-all duration-300 z-10 relative">
+                        <div className="absolute inset-0 rounded-2xl bg-orange-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                        <Zap size={28} className="text-orange-400 relative z-10 group-hover/step:scale-110 transition-transform animate-pulse" />
                       </div>
-                      <div className="h-12 w-[1px] bg-gradient-to-b from-orange-500/50 to-white/10 my-1"></div>
+                      <div className="h-16 w-1 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent my-2 relative">
+                        <div className="absolute inset-0 bg-gradient-to-b from-orange-500 to-transparent animate-flow" style={{ animationDelay: '0.8s' }}></div>
+                      </div>
                     </div>
-                    <span className="text-lg text-white font-medium py-3">2. Format & clean lead data in Zapier</span>
+                    <div className="flex-1 py-4">
+                      <div className="group/content">
+                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-orange-400 transition-colors">2. Format & Clean Data</h4>
+                        <p className="text-gray-400 text-sm">Zapier processes and validates lead information</p>
+                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-xs text-orange-300 font-medium">
+                          Processing...
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Step 3 */}
-                  <div className="flex gap-6 group/step">
+                  {/* Step 3 - Database Storage */}
+                  <div className="flex gap-6 group/step animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
                     <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover/step:border-white/30 transition-colors z-10">
-                        <Database size={24} className="text-blue-400" />
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-[#0f0f0f] border-2 border-blue-500/40 flex items-center justify-center group-hover/step:border-blue-500/80 group-hover/step:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 z-10 relative">
+                        <div className="absolute inset-0 rounded-2xl bg-blue-500/10 opacity-0 group-hover/step:opacity-100 transition-opacity duration-300"></div>
+                        <Database size={28} className="text-blue-400 relative z-10 group-hover/step:scale-110 transition-transform" />
                       </div>
                     </div>
-                    <span className="text-lg text-gray-300 font-medium py-3">3. Add lead to Airtable database</span>
+                    <div className="flex-1 py-4">
+                      <div className="group/content">
+                        <h4 className="text-lg font-bold text-white mb-2 group-hover/step:text-blue-400 transition-colors">3. Store in Database</h4>
+                        <p className="text-gray-400 text-sm">Lead automatically saved to Airtable</p>
+                        <div className="mt-3 inline-block px-3 py-1 rounded-full bg-green-500/20 border border-green-500/40 text-xs text-green-300 font-medium animate-pulse">
+                          ✓ Complete
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Flow Summary */}
+                  <div className="mt-8 pt-8 border-t border-white/10 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
+                        <div className="text-2xl font-bold text-orange-400">0.5s</div>
+                        <div className="text-xs text-gray-500 mt-1">Trigger</div>
+                      </div>
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-orange-500/30 transition-all">
+                        <div className="text-2xl font-bold text-orange-400">1.2s</div>
+                        <div className="text-xs text-gray-500 mt-1">Processing</div>
+                      </div>
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:border-green-500/30 transition-all">
+                        <div className="text-2xl font-bold text-green-400">2.0s</div>
+                        <div className="text-xs text-gray-500 mt-1">Total Time</div>
+                      </div>
+                    </div>
                   </div>
 
                 </div>
