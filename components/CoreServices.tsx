@@ -122,20 +122,31 @@ const CoreServices: React.FC = () => {
                     {/* Main Chart SVG */}
                     <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 350">
                       <defs>
-                        {/* Efficiency Gradient */}
+                        {/* Efficiency Gradient - Premium Orange */}
                         <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.4" />
+                          <stop offset="0%" stopColor="#FF8C00" stopOpacity="0.5" />
+                          <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.3" />
                           <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
                         </linearGradient>
-                        {/* Cost Gradient */}
+                        {/* Cost Gradient - Premium Blue */}
                         <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
+                          <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
+                          <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.25" />
                           <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
                         </linearGradient>
-                        {/* Glow Filter */}
+                        {/* Strong Glow Filter */}
                         <filter id="glow">
-                          <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                          <feGaussianBlur stdDeviation="4" result="coloredBlur" />
                           <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                        {/* Enhanced Glow for Lines */}
+                        <filter id="strongGlow">
+                          <feGaussianBlur stdDeviation="5" result="coloredBlur" />
+                          <feMerge>
+                            <feMergeNode in="coloredBlur" />
                             <feMergeNode in="coloredBlur" />
                             <feMergeNode in="SourceGraphic" />
                           </feMerge>
@@ -158,24 +169,26 @@ const CoreServices: React.FC = () => {
                         style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
                       />
 
-                      {/* Efficiency Line - Smooth Curve */}
+                      {/* Efficiency Line - Enhanced Glow */}
                       <path
                         d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
                         fill="none"
                         stroke="#FF6B00"
-                        strokeWidth="4"
-                        filter="url(#glow)"
-                        className="animate-draw drop-shadow-[0_0_15px_rgba(255,107,0,0.6)]"
+                        strokeWidth="5"
+                        filter="url(#strongGlow)"
+                        className="animate-draw"
+                        style={{ filter: 'drop-shadow(0 0 20px rgba(255,107,0,0.8))' }}
                       />
 
-                      {/* Cost Line - Smooth Curve */}
+                      {/* Cost Line - Enhanced Glow */}
                       <path
                         d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
                         fill="none"
-                        stroke="#3B82F6"
-                        strokeWidth="3"
+                        stroke="#60A5FA"
+                        strokeWidth="4"
                         strokeDasharray="8 4"
-                        className="animate-draw opacity-70"
+                        className="animate-draw"
+                        style={{ filter: 'drop-shadow(0 0 15px rgba(96,165,250,0.6))' }}
                       />
 
                       {/* Data Points on Efficiency Line */}
@@ -183,37 +196,38 @@ const CoreServices: React.FC = () => {
                         const y = 280 - (i * 44);
                         return (
                           <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
-                            <circle cx={x} cy={y} r="5" fill="#000" stroke="#FF6B00" strokeWidth="2" />
-                            <circle cx={x} cy={y} r="10" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.3" />
+                            <circle cx={x} cy={y} r="6" fill="#FF6B00" opacity="0.3" />
+                            <circle cx={x} cy={y} r="4" fill="#FF8C00" stroke="#FF6B00" strokeWidth="1.5" />
+                            <circle cx={x} cy={y} r="12" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
                           </g>
                         );
                       })}
 
-                      {/* Axis Lines */}
-                      <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
-                      <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
+                      {/* Axis Lines - Subtle */}
+                      <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
+                      <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.15" />
                     </svg>
 
                     {/* Floating Stat Cards */}
-                    <div className="absolute top-8 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-orange-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(255,107,0,0.2)] animate-float hover:shadow-[0_0_40px_rgba(255,107,0,0.3)] transition-all">
+                    <div className="absolute top-8 right-8 bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/40 rounded-2xl p-6 shadow-[0_0_40px_rgba(255,107,0,0.3)] animate-float hover:shadow-[0_0_60px_rgba(255,107,0,0.5)] transition-all duration-300 backdrop-blur-sm">
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
-                        <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Efficiency Gain</span>
+                        <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(255,165,0,0.8)]"></div>
+                        <span className="text-xs text-orange-300 uppercase tracking-wider font-semibold">Efficiency Gain</span>
                       </div>
-                      <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                      <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
                         +48%
-                        <span className="text-lg text-green-400">↑</span>
+                        <span className="text-lg text-emerald-400 font-bold">↑</span>
                       </div>
                     </div>
 
-                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-blue-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(59,130,246,0.2)] animate-float hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all" style={{ animationDelay: '1s' }}>
+                    <div className="absolute bottom-12 right-8 bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/40 rounded-2xl p-6 shadow-[0_0_40px_rgba(96,165,250,0.3)] animate-float hover:shadow-[0_0_60px_rgba(96,165,250,0.5)] transition-all duration-300 backdrop-blur-sm" style={{ animationDelay: '1s' }}>
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
-                        <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Cost Reduction</span>
+                        <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></div>
+                        <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Cost Reduction</span>
                       </div>
-                      <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                      <div className="text-4xl font-bold text-white mt-3 flex items-center gap-2">
                         -11%
-                        <span className="text-lg text-green-400">↓</span>
+                        <span className="text-lg text-emerald-400 font-bold">↓</span>
                       </div>
                     </div>
 
