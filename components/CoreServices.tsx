@@ -268,68 +268,74 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="group relative bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 hover:border-orange-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,0,0.2)] flex flex-col items-center justify-center min-h-[500px]">
+              <div className="group relative bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1e] to-[#050510] border border-white/5 rounded-3xl p-8 md:p-12 hover:border-purple-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)] flex flex-col items-center justify-center min-h-[500px] overflow-hidden">
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 opacity-30">
+                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+                  <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                </div>
+
                 <div className="relative z-10 flex flex-col items-center justify-center w-full gap-8">
 
-                  {/* Voice Assistant Interface */}
-                  <div className="max-w-md mx-auto w-full flex flex-col items-center justify-center py-8">
+                  {/* Speech Recognition Badge */}
+                  <div className="mb-4 animate-fade-in-down">
+                    <div className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.4)] border border-purple-400/30 inline-block">
+                      <span className="text-white font-semibold text-sm tracking-wide">Speech Recognition</span>
+                    </div>
+                  </div>
 
-                    {/* Central Mic with Waveforms */}
-                    <div className="relative flex items-center justify-center mb-8">
-                      {/* Left Waveform */}
-                      <div className="flex items-center gap-1 h-16 mr-6">
-                        {[...Array(8)].map((_, i) => (
-                          <div
-                            key={`wave-l-${i}`}
-                            className="w-1 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full"
-                            style={{
-                              height: `${20 + Math.sin(i * 0.8) * 60}%`,
-                              animation: `pulse 1.5s ease-in-out infinite`,
-                              animationDelay: `${i * 0.1}s`,
-                              opacity: 0.6 + (i * 0.05)
-                            }}
-                          ></div>
-                        ))}
-                      </div>
+                  {/* Main Card Container */}
+                  <div className="w-full max-w-md mx-auto">
+                    <div className="relative bg-gradient-to-br from-[#2a2a3e]/40 to-[#1a1a2e]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-purple-500/20 transition-all duration-300">
 
-                      {/* Main Mic Button */}
-                      <div className="relative z-10">
-                        <div className="absolute inset-0 bg-orange-500/30 rounded-full blur-xl animate-pulse-glow"></div>
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-[0_0_30px_rgba(255,107,0,0.4)] border border-orange-400/50 relative group cursor-pointer hover:scale-105 transition-transform duration-300">
-                          <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-ping opacity-20"></div>
-                          <Mic size={32} className="text-white drop-shadow-md" />
+                      {/* Inner glow effect */}
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                      <div className="relative z-10 flex items-center justify-between gap-6">
+
+                        {/* Left: Mic Button */}
+                        <div className="flex-shrink-0">
+                          <div className="relative">
+                            {/* Outer pulsing rings */}
+                            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-lg animate-pulse-glow" style={{ width: '100px', height: '100px', left: '-20px', top: '-20px' }}></div>
+                            <div className="absolute inset-0 rounded-full border border-purple-500/30 animate-pulse" style={{ width: '90px', height: '90px', left: '-15px', top: '-15px', animationDelay: '0.3s' }}></div>
+                            <div className="absolute inset-0 rounded-full border border-purple-500/20 animate-pulse" style={{ width: '80px', height: '80px', left: '-10px', top: '-10px', animationDelay: '0.6s' }}></div>
+
+                            {/* Main button */}
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.5)] border border-purple-400/50 relative cursor-pointer hover:scale-110 transition-transform duration-300 group/mic">
+                              {/* Inner glow */}
+                              <div className="absolute inset-1 rounded-full bg-gradient-to-br from-purple-400/30 to-transparent"></div>
+
+                              {/* White center dot */}
+                              <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] relative z-10 animate-pulse"></div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Right Waveform */}
-                      <div className="flex items-center gap-1 h-16 ml-6">
-                        {[...Array(8)].map((_, i) => (
-                          <div
-                            key={`wave-r-${i}`}
-                            className="w-1 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full"
-                            style={{
-                              height: `${20 + Math.sin(i * 0.8 + 2) * 60}%`,
-                              animation: `pulse 1.5s ease-in-out infinite`,
-                              animationDelay: `${i * 0.1}s`,
-                              opacity: 1 - (i * 0.05)
-                            }}
-                          ></div>
-                        ))}
-                      </div>
-                    </div>
+                        {/* Right: Waveform Bars */}
+                        <div className="flex-1 flex items-center justify-end gap-1.5 h-20">
+                          {[...Array(24)].map((_, i) => {
+                            const baseHeight = 30;
+                            const randomHeight = Math.sin(i * 0.5) * 40 + baseHeight;
+                            const delay = i * 0.05;
 
-                    {/* Label */}
-                    <div className="text-center space-y-2">
-                      <h4 className="text-xl font-bold text-white tracking-wide">Voice Assistant</h4>
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </span>
-                        <p className="text-sm text-gray-400 font-medium">Listening...</p>
+                            return (
+                              <div
+                                key={`bar-${i}`}
+                                className="w-1 bg-gradient-to-t from-purple-600 via-purple-500 to-purple-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.6)]"
+                                style={{
+                                  height: `${randomHeight}%`,
+                                  animation: `waveformBars 1.2s ease-in-out infinite`,
+                                  animationDelay: `${delay}s`,
+                                  opacity: 0.7 + (Math.sin(i * 0.3) * 0.3)
+                                }}
+                              ></div>
+                            );
+                          })}
+                        </div>
+
                       </div>
                     </div>
-
                   </div>
 
                 </div>
