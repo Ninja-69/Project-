@@ -22,39 +22,30 @@ const Testimonials: React.FC = () => {
   const reviews = [
     {
       id: 1,
-      logoIcon: <Box className="w-6 h-6 text-white" strokeWidth={2.5} />,
-      company: "Logoipsum",
-      text: "Our AI-driven voice assistant developed by Kynnex now handles all incoming customer support queries instantly, 24/7.",
-      author: "James Harrington",
-      role: "CEO - Logoipsum",
+      logoIcon: <Box className="w-6 h-6 text-amber-600" strokeWidth={2.5} />,
+      company: "The Local Roaster Café",
+      text: "I was dragging my feet on a new website because the last one was a confusing nightmare. The agency team made it painless. Now, our online ordering system actually works smoothly, and the site loads fast even on an old phone. Since the launch, our online pre-orders are up 60%. Honestly, it just makes me look more professional, and I'm not embarrassed to send customers there anymore.",
+      author: "David Chen",
+      role: "Owner - The Local Roaster Café",
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"
     },
     {
       id: 2,
-      logoIcon: <Circle className="w-6 h-6 text-white" strokeWidth={2.5} />,
-      company: "Logoipsum",
-      text: "Kynnex automated a large part of our workflows, resulting in a significant increase in productivity and a huge decrease in cost.",
-      author: "Emma Castillo",
-      role: "Founder - Logoipsum",
+      logoIcon: <Circle className="w-6 h-6 text-blue-400" strokeWidth={2.5} />,
+      company: "Elite Dental Care",
+      text: "Before this Voice Agent, my receptionists were constantly swamped just answering basic calls—'What are your hours?' 'Do you take my insurance?' Now, the AI handles all those repetitive questions perfectly. It sounds incredibly clear, and our patients love getting instant answers. My front office team can actually focus on patient care and scheduling, which has completely changed the stress level in the office.",
+      author: "Jessica Morales",
+      role: "Practice Manager - Elite Dental Care",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
     },
     {
       id: 3,
-      logoIcon: <Cloud className="w-6 h-6 text-white" strokeWidth={2.5} />,
-      company: "Logoipsum",
-      text: "Kynnex' AI consulting streamlined our operations and reduced costs by 30%. Would highly recommend their consulting services!",
-      author: "Liam Bennett",
-      role: "CTO - Logoipsum",
+      logoIcon: <Hexagon className="w-6 h-6 text-orange-500" strokeWidth={2.5} />,
+      company: "InnoWear Apparel",
+      text: "We had this ridiculous, manual process for categorizing thousands of customer feedback tickets. It was a massive time sink. The agency came in and built an AI model that does it instantly, with scary accuracy. It saves our analysts at least 20 hours per week and gives us real-time insights we didn't have before. The project was delivered on time, under budget, and the impact was immediate. No fluff, just results.",
+      author: "Omar Khan",
+      role: "Head of Product Development - InnoWear Apparel",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop"
-    },
-    {
-      id: 4,
-      logoIcon: <Hexagon className="w-6 h-6 text-white" strokeWidth={2.5} />,
-      company: "Logoipsum",
-      text: "Partnering with Auralis for the development of our customer service chatbot was the best decision we could've made!",
-      author: "Sophia Reynolds",
-      role: "Co-founder - Logoipsum",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop"
     }
   ];
 
