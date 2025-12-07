@@ -92,91 +92,133 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px]">
-                {/* Graph Container */}
-                <div className="relative h-[300px] w-full mt-8">
-                  {/* Grid Lines */}
-                  <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 border-l border-b border-white/5">
-                    {[...Array(24)].map((_, i) => (
-                      <div key={i} className="border-r border-t border-white/5"></div>
-                    ))}
+              <div className="bg-gradient-to-br from-[#050505] to-[#0a0a0a] border border-white/10 rounded-3xl p-6 md:p-12 relative overflow-hidden min-h-[500px]">
+                {/* Premium Graph Container */}
+                <div className="relative h-[350px] w-full mt-8">
+                  {/* Animated Grid Background */}
+                  <div className="absolute inset-0 opacity-30">
+                    <svg className="w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="url(#gridGradient)" strokeWidth="0.5"/>
+                        </pattern>
+                        <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1"/>
+                          <stop offset="100%" stopColor="#FF6B00" stopOpacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#grid)" />
+                    </svg>
                   </div>
 
-                  {/* SVG Lines */}
-                  <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                  {/* Main Chart SVG */}
+                  <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 350">
                     <defs>
-                      <linearGradient id="graphGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.2" />
+                      {/* Efficiency Gradient */}
+                      <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.4" />
                         <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
                       </linearGradient>
+                      {/* Cost Gradient */}
+                      <linearGradient id="costGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                      </linearGradient>
+                      {/* Glow Filter */}
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
                     </defs>
 
-                    {/* Gradient Fill Area (Under the curve) */}
+                    {/* Efficiency Area Fill */}
                     <path
-                      d="M0,280 C200,270 300,200 500,150 C700,100 800,90 900,80 V300 H0 Z"
-                      fill="url(#graphGradient)"
-                      className="opacity-0 animate-fade-in"
-                      style={{ animationDelay: '1s', animationFillMode: 'forwards', animationDuration: '1s' }}
+                      d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60 L900,350 L0,350 Z"
+                      fill="url(#efficiencyGradient)"
+                      className="animate-fade-in"
+                      style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
                     />
 
-                    {/* Dotted Line (Cost) - Animated */}
+                    {/* Cost Area Fill */}
                     <path
-                      d="M0,150 C100,150 200,180 300,220 C400,260 500,280 800,290"
-                      fill="none"
-                      stroke="#333"
-                      strokeWidth="2"
-                      strokeDasharray="6 6"
-                      className="animate-draw"
-                      style={{ opacity: 0.5 }}
+                      d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300 L900,350 L0,350 Z"
+                      fill="url(#costGradient)"
+                      className="animate-fade-in"
+                      style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
                     />
 
-                    {/* Solid Line (Efficiency) - Animated */}
+                    {/* Efficiency Line - Smooth Curve */}
                     <path
-                      d="M0,280 C200,270 300,200 500,150 C700,100 800,90 900,80"
+                      d="M0,280 C150,260 250,180 400,140 C550,100 700,80 900,60"
                       fill="none"
                       stroke="#FF6B00"
-                      strokeWidth="3"
-                      className="drop-shadow-[0_0_10px_rgba(255,107,0,0.5)] animate-draw"
+                      strokeWidth="4"
+                      filter="url(#glow)"
+                      className="animate-draw drop-shadow-[0_0_15px_rgba(255,107,0,0.6)]"
                     />
 
-                    {/* End Point Dot with Pulse */}
-                    <g className="animate-fade-in" style={{ animationDelay: '1.8s', opacity: 0, animationFillMode: 'forwards' }}>
-                      <circle cx="900" cy="80" r="6" fill="#000" stroke="#FF6B00" strokeWidth="3" />
-                      <circle cx="900" cy="80" r="12" fill="none" stroke="#FF6B00" strokeWidth="1" className="animate-ping opacity-50" />
-                      <circle cx="900" cy="80" r="20" fill="none" stroke="#FF6B00" strokeWidth="0.5" className="animate-pulse-slow opacity-30" />
-                    </g>
+                    {/* Cost Line - Smooth Curve */}
+                    <path
+                      d="M0,200 C150,210 250,240 400,260 C550,280 700,290 900,300"
+                      fill="none"
+                      stroke="#3B82F6"
+                      strokeWidth="3"
+                      strokeDasharray="8 4"
+                      className="animate-draw opacity-70"
+                    />
+
+                    {/* Data Points on Efficiency Line */}
+                    {[0, 225, 450, 675, 900].map((x, i) => {
+                      const y = 280 - (i * 44);
+                      return (
+                        <g key={`point-${i}`} className="animate-fade-in" style={{ animationDelay: `${0.8 + i * 0.15}s`, opacity: 0, animationFillMode: 'forwards' }}>
+                          <circle cx={x} cy={y} r="5" fill="#000" stroke="#FF6B00" strokeWidth="2" />
+                          <circle cx={x} cy={y} r="10" fill="none" stroke="#FF6B00" strokeWidth="1" opacity="0.3" />
+                        </g>
+                      );
+                    })}
+
+                    {/* Axis Lines */}
+                    <line x1="0" y1="330" x2="900" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
+                    <line x1="0" y1="0" x2="0" y2="330" stroke="#FF6B00" strokeWidth="1" opacity="0.2" />
                   </svg>
 
-                  {/* Floating Badges */}
-                  <div className="absolute top-[20%] right-[15%] bg-[#111] border border-white/10 rounded-xl p-4 shadow-2xl animate-float">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                      <span className="text-xs text-gray-400 uppercase tracking-wider">Efficiency</span>
+                  {/* Floating Stat Cards */}
+                  <div className="absolute top-8 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-orange-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(255,107,0,0.2)] animate-float hover:shadow-[0_0_40px_rgba(255,107,0,0.3)] transition-all">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
+                      <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Efficiency Gain</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-3xl font-bold text-white">+48%</span>
-                      <div className="bg-green-500/20 p-1 rounded">
-                        <TrendingUp size={16} className="text-green-500" />
-                      </div>
+                    <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                      +48%
+                      <span className="text-lg text-green-400">↑</span>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-[10%] right-[25%] bg-[#111] border border-white/10 rounded-xl p-4 shadow-2xl animate-float" style={{ animationDelay: '1s' }}>
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-2 h-2 rounded-full bg-gray-500"></div>
-                      <span className="text-xs text-gray-400 uppercase tracking-wider">Cost</span>
+                  <div className="absolute bottom-12 right-8 bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-blue-500/30 rounded-2xl p-5 shadow-[0_0_30px_rgba(59,130,246,0.2)] animate-float hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all" style={{ animationDelay: '1s' }}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+                      <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Cost Reduction</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-3xl font-bold text-white">-11%</span>
-                      <div className="bg-green-500/20 p-1 rounded">
-                        <ArrowDown size={16} className="text-green-500" />
-                      </div>
+                    <div className="text-4xl font-bold text-white mt-2 flex items-center gap-2">
+                      -11%
+                      <span className="text-lg text-green-400">↓</span>
                     </div>
                   </div>
 
-                  {/* X-Axis Labels */}
-                  <div className="absolute bottom-[-40px] left-0 w-full flex justify-between text-xs text-gray-600 font-mono uppercase px-4">
-                    <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                  {/* Legend */}
+                  <div className="absolute bottom-0 left-0 flex gap-8 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-0.5 bg-orange-500 rounded-full"></div>
+                      <span className="text-gray-400">Efficiency</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-0.5 bg-blue-500 rounded-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #3B82F6 0px, #3B82F6 4px, transparent 4px, transparent 8px)' }}></div>
+                      <span className="text-gray-400">Cost</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -193,34 +235,70 @@ const CoreServices: React.FC = () => {
             </Reveal>
 
             <Reveal effect="zoom-in" delay={0.2} width="100%">
-              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[400px] flex items-center justify-center">
-                <div className="relative flex items-center justify-center w-full max-w-2xl">
+              <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden min-h-[500px] flex flex-col items-center justify-center">
+                <div className="relative flex flex-col items-center justify-center w-full max-w-2xl gap-8">
 
-                  {/* Left Waveform */}
-                  <div className="flex items-center gap-1 h-16 opacity-50">
-                    {[...Array(15)].map((_, i) => (
-                      <div key={`l-${i}`} className="w-1 bg-orange-500 rounded-full animate-pulse" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                  {/* Waveform Visualization */}
+                  <div className="flex items-center justify-center gap-1 h-20">
+                    {[...Array(20)].map((_, i) => (
+                      <div key={`wave-${i}`} className="w-1.5 bg-gradient-to-t from-orange-500 to-orange-300 rounded-full" style={{ height: `${30 + Math.sin(i * 0.5) * 40}%`, animation: `pulse 0.8s ease-in-out infinite`, animationDelay: `${i * 0.05}s` }}></div>
                     ))}
                   </div>
 
-                  {/* Central Mic */}
-                  <div className="relative mx-8 z-10">
-                    <div className="w-24 h-24 rounded-full bg-[#111] border border-white/10 flex items-center justify-center shadow-[0_0_50px_rgba(255,107,0,0.15)] relative">
-                      <div className="absolute inset-0 rounded-full border border-orange-500/30 animate-ping opacity-20"></div>
-                      <Mic size={32} className="text-white" />
-                    </div>
-                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                      <span className="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-xs font-medium">
-                        Active Listening...
-                      </span>
+                  {/* Central Mic with Glow */}
+                  <div className="relative">
+                    <div className="absolute inset-0 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl animate-pulse"></div>
+                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-orange-600 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(255,107,0,0.4)] border-2 border-orange-400/50">
+                      <div className="absolute inset-2 rounded-full border-2 border-orange-300/30 animate-spin" style={{ animationDuration: '3s' }}></div>
+                      <Mic size={48} className="text-white relative z-10 animate-pulse" />
                     </div>
                   </div>
 
-                  {/* Right Waveform */}
-                  <div className="flex items-center gap-1 h-16 opacity-50">
-                    {[...Array(15)].map((_, i) => (
-                      <div key={`r-${i}`} className="w-1 bg-orange-500 rounded-full animate-pulse" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
-                    ))}
+                  {/* Status Text with Animation */}
+                  <div className="text-center">
+                    <div className="px-6 py-2 rounded-full bg-orange-500/20 border border-orange-500/40 inline-block mb-4">
+                      <span className="text-orange-300 text-sm font-semibold animate-pulse">🎙️ Listening...</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">Real-time voice processing with AI intelligence</p>
+                  </div>
+
+                  {/* Premium Chat Simulation */}
+                  <div className="w-full max-w-md space-y-4 mt-8 bg-gradient-to-b from-white/5 to-transparent rounded-2xl p-4 border border-white/10">
+                    {/* User Message */}
+                    <div className="flex justify-end animate-fade-in-up" style={{ animationDelay: '0s' }}>
+                      <div className="group relative max-w-xs">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-orange-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
+                        <div className="relative bg-gradient-to-br from-orange-500/30 to-orange-600/20 border border-orange-500/50 rounded-2xl px-4 py-3 shadow-lg hover:shadow-[0_0_20px_rgba(255,107,0,0.3)] transition-all">
+                          <p className="text-gray-100 text-sm font-medium">Can you help me track my order?</p>
+                          <span className="text-xs text-gray-400 mt-1 block">Just now</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Typing Indicator */}
+                    <div className="flex justify-start animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+                      <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0s' }}></div>
+                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                        </div>
+                        <span className="text-xs text-gray-500">AI is thinking...</span>
+                      </div>
+                    </div>
+
+                    {/* AI Response */}
+                    <div className="flex justify-start animate-fade-in-up" style={{ animationDelay: '1.6s' }}>
+                      <div className="group relative max-w-xs">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                        <div className="relative bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl px-4 py-3 shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all">
+                          <p className="text-gray-200 text-sm leading-relaxed">
+                            <span className="font-semibold text-white">Order #12847</span> is on its way! 📦 Arriving tomorrow by 2 PM. Track it <span className="text-orange-400 font-medium">here</span>.
+                          </p>
+                          <span className="text-xs text-gray-500 mt-2 block">1s ago</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                 </div>

@@ -164,7 +164,7 @@ const Hero: React.FC<{ onViewWork?: () => void; onBookCall?: () => void }> = ({ 
 
         {/* Marquee Section - Smooth fade transition */}
         <Reveal effect="fade-in" duration={1} delay={0.6} className="w-full mt-auto">
-          <div className="w-full relative pt-12 pb-8 bg-gradient-to-b from-black/0 via-black/40 to-black/80 backdrop-blur-sm">
+          <div className="w-full relative pt-24 md:pt-32 pb-12 md:pb-16 bg-gradient-to-b from-black/0 via-black/40 to-black/80 backdrop-blur-sm">
             <p className="text-xs md:text-sm text-gray-500 mb-8 uppercase tracking-[0.3em] font-semibold">Trusted by Innovative Companies</p>
 
             <div className="w-full overflow-hidden relative mask-linear-gradient">
